@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <title>Calculate Patient wound size</title>
+
+  <style>
+    h3{ 
+      color: green;
+    }
+    h5{ 
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <div class="container p-3 my-3 bg-primary text-white">
+    <h1>CARE DETAILS</h1>
+    <p>Patient wound size monitoring System using image processing technique</p>
+    <a href="{% url 'index' %}"><button type="button" class="btn btn-success">CALCULATE PIXEL</button></a>
+    <a href="{% url 'add_patient' %}"><button type="button" class="btn btn-secondary">ADD PATIENTS</button></a>
+    <a href="{% url 'add_nurse' %}"><button type="button" class="btn btn-secondary">ADD NURSE</button></a>
+    <a href="{% url 'add_care' %}"><button type="button" class="btn btn-secondary">ADD CARE</button></a>
+    <a href="{% url 'search_data' %}"><button type="button" class="btn btn-secondary">Search</button></a>
+    <a href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-secondary">Manage nurse</button></a>
+  </div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form method="post" enctype="multipart/form-data" >
+      {% csrf_token %}
+      {{ add_care.as_p }}
+      <button type="submit" class="btn btn-outline-success">ADD</button>
+      </form>
+    </div>
+    <div class="col">
+      {% if add_obj %}
+        <h3>Succesfully uploaded !! </h3>
+        <p class="text-primary">PatientID is : {{add_obj.patient_id}}</p>
+        <p class="text-primary">Care date is : {{add_obj.care_date}}</p>
+        <p class="text-primary">Lesion ID is : {{add_obj.lesion_id}}</p>
+        <p class="text-primary">Nurse ID is : {{add_obj.nurse_id}}</p>
+        <p class="text-primary">Detail is : {{add_obj.detail}}</p>
+        <h5> Value of ROI : {{add_obj.size}} </h5>
+        <p class="text-warning">URL is : {{add_obj.image.url}}</p>
+        <p class="text-warning">PATH is : {{add_obj.image.path}}</p>
+        <img src="{{ add_obj.image.url}}" alt="connect" class="mx-auto d-block" style="width : 30%">
+
+        
+      {% endif %}
+    </div>
+  </div>
+</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <title>Calculate Patient wound size</title>
+
+  <style>
+    h3{ 
+      color: green;
+    }
+    h5{ 
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+  <div class="container p-3 my-3 bg-primary text-white">
+    <h1>ADD NURSE DETAILS</h1>
+    <p>Patient wound size monitoring System using image processing technique</p>
+    <a href="{% url 'index' %}"><button type="button" class="btn btn-success">CALCULATE PIXEL</button></a>
+    <a href="{% url 'add_patient' %}"><button type="button" class="btn btn-secondary">ADD PATIENTS</button></a>
+    <a href="{% url 'add_nurse' %}"><button type="button" class="btn btn-secondary">ADD NURSE</button></a>
+    <a href="{% url 'add_care' %}"><button type="button" class="btn btn-secondary">ADD CARE</button></a>
+    <a href="{% url 'search_data' %}"><button type="button" class="btn btn-secondary">Search</button></a>
+    <a href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-secondary">Manage nurse</button></a>
+  </div>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form method="post" enctype="multipart/form-data" >
+      {% csrf_token %}
+      {{ add_nurse.as_p }}
+      <button type="submit" class="btn btn-outline-success">ADD</button>
+      </form>
+    </div>
+    <div class="col">
+      {% if add_obj %}
+        <h3>Succesfully uploaded !! </h3>
+        <p class="text-primary">NurseID is : {{add_obj.nurse_id}}</p>
+        <p class="text-info">Firstname : {{add_obj.first_name}}</p>
+        <p class="text-info">Lastname : {{add_obj.last_name}}</p>
+        <p class="text-info">Birthday : {{add_obj.birthday}}</p>
+        <p class="text-info">Gender : {{add_obj.gender}}</p>
+        
+      {% endif %}
+    </div>
+  </div>
+</div>
+</form>
+</body>
+</html>

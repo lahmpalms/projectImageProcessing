@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <title>Calculate Patient wound size</title>
+
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+              }
+              
+              td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+              }
+              
+              tr:nth-child(even) {
+                background-color: #dddddd;
+              }
+        </style>
+    </head>
+    <body>
+        <div class="container p-3 my-3 bg-primary text-white">
+            <h1> Manage Nurse</h1>
+            <p>Patient wound size monitoring System using image processing technique</p>
+            <a href="{% url 'index' %}"><button type="button" class="btn btn-success">CALCULATE PIXEL</button></a>
+            <a href="{% url 'add_patient' %}"><button type="button" class="btn btn-secondary">ADD PATIENTS</button></a>
+            <a href="{% url 'add_nurse' %}"><button type="button" class="btn btn-secondary">ADD NURSE</button></a>
+            <a href="{% url 'add_care' %}"><button type="button" class="btn btn-secondary">ADD CARE</button></a>
+            <a href="{% url 'search_data' %}"><button type="button" class="btn btn-secondary">Search</button></a>
+            <a href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-secondary">Manage nurse</button></a>
+        </div>
+        <div class="container">
+            <form method="POST">
+                {% csrf_token %}
+                <input name='name' type="text" placeholder="Search" class="form-control form-control-lg" />
+                <button type="submit" class="btn btn-primary btn-lg btn-block"> Search </button>
+            </form>
+            <table>
+                <tr> 
+                    <th> NURSE ID </th>
+                    <th> FIRSTNAME </th>
+                    <th> LASTNAME </th>
+                    <th> GENDER </th>
+                    <th> BIRTHDAY </th>
+                </tr>
+                
+                {% for result in results %}
+                <tr>
+                    <td> {{result.nurse_id}} </td>
+                    <td> {{result.first_name}} </td>
+                    <td> {{result.last_name}} </td>
+                    <td> {{result.gender}} </td>
+                    <td> {{result.birthday}} </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </body>
+</html>
