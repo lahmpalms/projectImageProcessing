@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.utils.translation import deactivate
 from numpy.lib.type_check import imag
 from uploadimg.forms import ImageForm ,add_patient_form, add_care_form, add_nurse_form
-from .models import Care, Nurse
+from .models import Care, Nurse, Patient
 
 from uploadimg.utils import Calculate , bitwise
 from skimage.morphology import black_tophat, skeletonize, convex_hull_image
@@ -74,6 +74,15 @@ def manage_nurse(request):
             search_results = Nurse.objects.filter(first_name__contains = query_name)
             return render(request, 'manage_nurse.html', {'results':search_results})
     return render(request, 'manage_nurse.html', {'results':results})
+
+def manage_patient(request):
+    results = Patient.objects.all()
+    if request.method == "POST":
+        query_name = request.POST.get('name', None)
+        if query_name:
+            search_results = Patient.objects.filter(first_name__contains = query_name)
+            return render(request, 'manage_patient.html', {'results':search_results})
+    return render(request, 'manage_patient.html', {'results':results})
 
 def search(request):
     if request.method == "POST":
