@@ -92,3 +92,13 @@ def search(request):
             return render(request, 'show_data.html', {"results":results})
 
     return render(request, 'show_data.html')
+
+# def update_nurse(request , id):
+#     context = {}
+#     results = get_object_or_404(Nurse, id = id)
+#     form = add_nurse_form(request.POST or None, instance = results)
+#     if form.is_valid():
+#         form.save()
+#         return render(request, 'edit_nurse.html',{'form':form})
+#     context["form"] = form
+# 	return render(request, 'edit_nurse.html', context)

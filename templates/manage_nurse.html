@@ -50,6 +50,7 @@
                     <th> LASTNAME </th>
                     <th> GENDER </th>
                     <th> BIRTHDAY </th>
+                    <th> Manage </th>
                 </tr>
                 
                 {% for result in results %}
@@ -59,6 +60,10 @@
                     <td> {{result.last_name}} </td>
                     <td> {{result.gender}} </td>
                     <td> {{result.birthday}} </td>
+                    <td> 
+                        <button type="button" class="btn btn-warning"> Edit </button>
+                        <button type="button" class="btn btn-danger"> Delete </button>
+                    </td>
                 </tr>
                 {% endfor %}
             </table>
