@@ -40,7 +40,7 @@ class Nurse(models.Model):
         ('MALE', 'MALE'),
         ('FEMALE', 'FEMALE')
     )
-    nurse_id = models.CharField(max_length=8)
+    nurse_id = models.CharField(max_length=8, primary_key=True)
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     gender = models.CharField(max_length=6,choices=GENDER_CHOICES)

@@ -103,3 +103,11 @@ def updateNurse(request, nurse_id):
             update_obj = form.instance
             return render(request, 'edit_nurse.html',{'form':form,'update_obj':update_obj})
     return render(request, 'edit_nurse.html', {'form':form})
+
+def deleteNurse(request, nurse_id):
+    nurse = Nurse.objects.get(nurse_id = nurse_id)
+    context = {'delete_obj':nurse}
+    if request.method == 'POST':
+        nurse.delete()
+        return redirect('manage_nurse')
+    return render(request, 'delete_nurse.html', context)

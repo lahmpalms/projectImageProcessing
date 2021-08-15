@@ -62,7 +62,7 @@
                     <td> {{result.birthday}} </td>
                     <td> 
                         <a href="{% url 'update_nurse' result.nurse_id %}"><button type="button" class="btn btn-warning"> Edit </button></a>
-                        <button type="button" class="btn btn-danger"> Delete </button>
+                        <a href="{% url 'delete_nurse' result.nurse_id %}"> <button type="button" class="btn btn-danger"> Delete </button> </a>
                     </td>
                 </tr>
                 {% endfor %}
