@@ -29,7 +29,7 @@ urlpatterns = [
     path('manage_patient/',views.manage_patient, name='manage_patient'),
     path('add_nurse/',views.add_nurse, name='add_nurse'),
     path('manage_nurse/',views.manage_nurse, name='manage_nurse'),
-    # path('update_nurse/',views.update_nurse, name='update_nurse'),
+    path('update_nurse/<str:nurse_id>',views.updateNurse, name='update_nurse'),
     path('search/',views.search, name='search_data'),
     path('care/',views.add_care, name='add_care'),
 ]

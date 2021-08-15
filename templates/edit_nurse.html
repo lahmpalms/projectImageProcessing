@@ -33,21 +33,21 @@
     <div class="col">
       <form method="post" enctype="multipart/form-data" >
       {% csrf_token %}
-      {{ add_nurse.as_p }}
+      {{ form.as_p }}
       <button type="submit" class="btn btn-outline-success" value="Update">Update</button>
       </form>
     </div>
-    <!-- <div class="col">
-      {% if add_obj %}
+    <div class="col">
+      {% if update_obj %}
         <h3>Succesfully update !! </h3>
-        <p class="text-primary">NurseID is : {{add_obj.nurse_id}}</p>
-        <p class="text-info">Firstname : {{add_obj.first_name}}</p>
-        <p class="text-info">Lastname : {{add_obj.last_name}}</p>
-        <p class="text-info">Birthday : {{add_obj.birthday}}</p>
-        <p class="text-info">Gender : {{add_obj.gender}}</p>
+        <p class="text-primary">NurseID is : {{update_obj.nurse_id}}</p>
+        <p class="text-info">Firstname : {{update_obj.first_name}}</p>
+        <p class="text-info">Lastname : {{update_obj.last_name}}</p>
+        <p class="text-info">Birthday : {{update_obj.birthday}}</p>
+        <p class="text-info">Gender : {{update_obj.gender}}</p>
         
       {% endif %}
-    </div> -->
+    </div>
   </div>
 </div>
 </form>

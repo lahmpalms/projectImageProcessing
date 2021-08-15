@@ -93,12 +93,14 @@ def search(request):
 
     return render(request, 'show_data.html')
 
-# def update_nurse(request , id):
-#     context = {}
-#     results = get_object_or_404(Nurse, id = id)
-#     form = add_nurse_form(request.POST or None, instance = results)
-#     if form.is_valid():
-#         form.save()
-#         return render(request, 'edit_nurse.html',{'form':form})
-#     context["form"] = form
-# 	return render(request, 'edit_nurse.html', context)
+def updateNurse(request, nurse_id):
+    nurse = Nurse.objects.get(nurse_id = nurse_id)
+    form = add_nurse_form(instance=nurse)
+    if request.method == 'POST':
+        form = add_nurse_form(request.POST, instance=nurse)
+        if form.is_valid():
+            form.save()
+            update_obj = form.instance
+            return render(request, 'edit_nurse.html',{'form':form,'update_obj':update_obj})
+            # return redirect('/',{'form':form, 'updata_obj':update_obj})
+    return render(request, 'edit_nurse.html', {'form':form})
