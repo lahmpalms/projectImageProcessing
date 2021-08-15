@@ -102,5 +102,4 @@ def updateNurse(request, nurse_id):
             form.save()
             update_obj = form.instance
             return render(request, 'edit_nurse.html',{'form':form,'update_obj':update_obj})
-            # return redirect('/',{'form':form, 'updata_obj':update_obj})
     return render(request, 'edit_nurse.html', {'form':form})
