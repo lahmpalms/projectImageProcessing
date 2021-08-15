@@ -31,7 +31,6 @@ urlpatterns = [
     path('manage_nurse/',views.manage_nurse, name='manage_nurse'),
     path('update_nurse/<str:nurse_id>',views.updateNurse, name='update_nurse'),
     path('delete_nurse/<str:nurse_id>',views.deleteNurse, name='delete_nurse'),
-    path('return_delete_nurse/',views.deleteNurse, name='return_delete_nurse'),
     path('search/',views.search, name='search_data'),
     path('care/',views.add_care, name='add_care'),
 ]
