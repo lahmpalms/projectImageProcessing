@@ -120,3 +120,11 @@ def updatePatient(request, patient_id):
             form.save()
             return redirect('manage_patient')
     return render(request, 'edit_patient.html', {'form':form})
+
+def deletePatient(request, patient_id):
+    patient = Patient.objects.get(patient_id = patient_id)
+    context = {'delete_obj':patient}
+    if request.method == 'POST':
+        patient.delete()
+        return redirect('manage_patient')
+    return render(request, 'delete_patient.html', context)

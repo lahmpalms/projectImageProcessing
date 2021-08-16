@@ -65,7 +65,7 @@
                     <td> {{result.HealthWelfare.HealthWelfare_name}} </td>
                     <td> 
                         <a href="{% url 'update_patient' result.patient_id %}"><button type="button" class="btn btn-warning"> Edit </button></a>
-
+                        <a href="{% url 'delete_patient' result.patient_id %}"> <button type="button" class="btn btn-danger"> Delete </button> </a>
                     </td>
                 </tr>
                 {% endfor %}

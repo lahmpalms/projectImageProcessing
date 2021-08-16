@@ -28,6 +28,7 @@ urlpatterns = [
     path('add_patient/',views.add_patients, name='add_patient'),
     path('manage_patient/',views.manage_patient, name='manage_patient'),
     path('update_patient/<str:patient_id>',views.updatePatient, name='update_patient'),
+    path('delete_patient/<str:patient_id>',views.deletePatient, name='delete_patient'),
     path('add_nurse/',views.add_nurse, name='add_nurse'),
     path('manage_nurse/',views.manage_nurse, name='manage_nurse'),
     path('update_nurse/<str:nurse_id>',views.updateNurse, name='update_nurse'),
