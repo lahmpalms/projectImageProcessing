@@ -28,7 +28,7 @@
     </head>
     <body>
         <div class="container p-3 my-3 bg-primary text-white">
-            <h1> Manage Patient</h1>
+            <h1> Manage Healthwelfare</h1>
             <p>Patient wound size monitoring System using image processing technique</p>
             <a href="{% url 'index' %}"><button type="button" class="btn btn-success">CALCULATE PIXEL</button></a>
             <a href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-secondary">Manage nurse</button></a>
@@ -37,40 +37,25 @@
             <a href="{% url 'manage_healthwelfare' %}"><button type="button" class="btn btn-secondary">Manage healthwelfare</button></a>
         </div>
         <div class="container">
-            <form method="POST">
-                {% csrf_token %}
-                <input name='name' type="text" placeholder="Search" class="form-control form-control-lg" />
-                <button type="submit" class="btn btn-primary btn-lg btn-block"> Search </button>
-            </form>
-            <a href="{% url 'add_patient' %}"><button type="button" class="btn btn-success">ADD PATIENTS</button></a>
             <table>
                 <tr> 
-                    <th> HN </th>
-                    <th> FIRSTNAME </th>
-                    <th> LASTNAME </th>
-                    <th> GENDER </th>
-                    <th> BIRTHDAY </th>
-                    <th> HEALTHWELFARE </th>
-                    <th> DISEASE </th>
+                    <th> Healthwelfare ID </th>
+                    <th> Healthwelfare NAME </th>
                     <th> Manage </th>
                 </tr>
                 
                 {% for result in results %}
                 <tr>
-                    <td> {{result.patient_id}} </td>
-                    <td> {{result.first_name}} </td>
-                    <td> {{result.last_name}} </td>
-                    <td> {{result.gender}} </td>
-                    <td> {{result.birthday}} </td>
-                    <td> {{result.HealthWelfare.HealthWelfare_name}} </td>
-                    <td> {{result.Disease_id.Disease_name}} </td>
+                    <td> {{result.HealthWelfare_ID}} </td>
+                    <td> {{result.HealthWelfare_name}} </td>
                     <td> 
-                        <a href="{% url 'update_patient' result.patient_id %}"><button type="button" class="btn btn-warning"> Edit </button></a>
-                        <a href="{% url 'delete_patient' result.patient_id %}"> <button type="button" class="btn btn-danger"> Delete </button> </a>
+                        <a href="{% url 'update_healthwelfare' result.HealthWelfare_ID %}"> <button type="button" class="btn btn-warning"> Edit </button> </a>
+                        <a href="{% url 'delete_healthwelfare' result.HealthWelfare_ID %}"> <button type="button" class="btn btn-danger"> Delete </button> </a>
                     </td>
                 </tr>
                 {% endfor %}
             </table>
+            <a href="{% url 'add_healthwelfare' %}"><button type="button" class="btn btn-success">ADD HEALTHWELFARE</button></a>
         </div>
     </body>
 </html>

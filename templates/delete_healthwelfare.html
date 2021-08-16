@@ -6,16 +6,16 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <title>confirm delete Disease</title>
+  <title>confirm delete Healthwelfare</title>
 </head>
 <body>
     <div class="alert alert-danger">
         <strong> Are your sure to delete "{{delete_obj}}"  </strong>
 
-        <form action="{% url 'delete_disease' delete_obj.Disease_id %}" method="post" enctype="multipart/form-data">
+        <form action="{% url 'delete_healthwelfare' delete_obj.HealthWelfare_ID %}" method="post" enctype="multipart/form-data">
 
             {% csrf_token %}
-            <a href=" {% url 'manage_disease' %}"> <button type="button" class="btn btn-dark"> Cancel </button></a>
+            <a href=" {% url 'manage_healthwelfare' %}"> <button type="button" class="btn btn-dark"> Cancel </button></a>
             <input type="submit" name="Confirm" class="btn btn-danger">
 
         </form>

@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import fields
-from uploadimg.models import Image, Patient, Care, Nurse, Disease
+from uploadimg.models import Image, Patient, Care, Nurse, Disease, HealthWelfare
 
 class ImageForm(forms.ModelForm):
     
@@ -24,7 +24,11 @@ class add_nurse_form(forms.ModelForm):
         fields = ('nurse_id', 'first_name', 'last_name', 'gender', 'birthday')
         
 class add_disease_form(forms.ModelForm):
-    
     class Meta:
         model = Disease
+        fields = ('__all__')
+        
+class add_healthwelfare_form(forms.ModelForm):
+    class Meta:
+        model = HealthWelfare
         fields = ('__all__')

@@ -3,8 +3,8 @@ from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.utils.translation import deactivate
 from numpy.lib.type_check import imag
-from uploadimg.forms import ImageForm ,add_patient_form, add_care_form, add_nurse_form, add_disease_form
-from .models import Care, Nurse, Patient, Disease
+from uploadimg.forms import ImageForm ,add_patient_form, add_care_form, add_nurse_form, add_disease_form, add_disease_form, add_healthwelfare_form
+from .models import Care, Nurse, Patient, Disease, HealthWelfare
 
 from uploadimg.utils import Calculate , bitwise
 from skimage.morphology import black_tophat, skeletonize, convex_hull_image
@@ -77,6 +77,17 @@ def add_disease(request):
         add_disease = add_disease_form
     return render(request, 'add_disease.html',{'add_disease':add_disease})
 
+def add_healthWelfare(request):
+    if request.method == 'POST':
+        add_healthwelfare = add_healthwelfare_form(request.POST)
+        if add_healthwelfare.is_valid():
+            add_healthwelfare.save()
+            add_obj = add_healthwelfare.instance
+            return render(request, 'add_healthwelfare.html', {'add_healthwelfare':add_healthwelfare, 'add_obj':add_obj})
+    else:
+        add_healthwelfare = add_healthwelfare_form
+    return render(request, 'add_healthwelfare.html',{'add_healthwelfare':add_healthwelfare})
+
 def manage_nurse(request):
     results = Nurse.objects.all()
     if request.method == "POST":
@@ -98,6 +109,10 @@ def manage_patient(request):
 def manage_disease(request):
     results = Disease.objects.all()
     return render(request, 'manage_disease.html', {'results':results})
+
+def manage_healthWelfare(request):
+    results = HealthWelfare.objects.all()
+    return render(request, 'manage_healthwelfare.html', {'results':results})
 
 def search(request):
     if request.method == "POST":
@@ -137,7 +152,6 @@ def updatePatient(request, patient_id):
     return render(request, 'edit_patient.html', {'form':form})
 
 def deletePatient(request, patient_id):
-    
     patient = Patient.objects.get(patient_id = patient_id)
     context = {'delete_obj':patient}
     if request.method == 'POST':
@@ -156,7 +170,6 @@ def updateDisease(request, Disease_id):
     return render(request, 'edit_disease.html', {'form':form})
 
 def deleteDisease(request, Disease_id):
-    
     disease = Disease.objects.get(Disease_id = Disease_id)
     context = {'delete_obj':disease}
     if request.method == 'POST':
@@ -164,3 +177,20 @@ def deleteDisease(request, Disease_id):
         return redirect('manage_disease')
     return render(request, 'delete_disease.html', context)
 
+def updateHealthwelfare(request, HealthWelfare_ID):
+    healthwelfare = HealthWelfare.objects.get(HealthWelfare_ID = HealthWelfare_ID)
+    form = add_healthwelfare_form(instance=healthwelfare)
+    if request.method == 'POST':
+        form = add_healthwelfare_form(request.POST, instance=healthwelfare)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_healthwelfare')
+    return render(request, 'edit_healthwelfare.html', {'form':form})
+
+def deleteHealthwelfare(request, HealthWelfare_ID):
+    healthwelfare = HealthWelfare.objects.get(HealthWelfare_ID = HealthWelfare_ID)
+    context = {'delete_obj':healthwelfare}
+    if request.method == 'POST':
+        healthwelfare.delete()
+        return redirect('manage_healthwelfare')
+    return render(request, 'delete_healthwelfare.html', context)
