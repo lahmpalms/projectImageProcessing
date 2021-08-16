@@ -16,7 +16,7 @@ class add_patient_form(forms.ModelForm):
 class add_care_form(forms.ModelForm):
     class Meta:
         model = Care
-        fields = ('patient_id', 'care_date', 'lesion_id', 'nurse_id', 'detail' , 'image')
+        fields = ('patient_id', 'care_date', 'lesion_id', 'nurse_id', 'detail' , 'lesion_statusid', 'image')
 
 class add_nurse_form(forms.ModelForm):
     class Meta:
