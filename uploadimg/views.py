@@ -3,7 +3,7 @@ from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.utils.translation import deactivate
 from numpy.lib.type_check import imag
-from uploadimg.forms import ImageForm ,add_patient_form, add_care_form, add_nurse_form
+from uploadimg.forms import ImageForm ,add_patient_form, add_care_form, add_nurse_form, add_disease_form
 from .models import Care, Nurse, Patient
 
 from uploadimg.utils import Calculate , bitwise
@@ -29,6 +29,7 @@ def index(request):
         form = ImageForm()
     return render(request, 'index.html', {'form': form})
 
+# ADD OBJECT
 def add_patients(request):
     if request.method == 'POST':
         add_patient = add_patient_form(request.POST)
@@ -65,6 +66,17 @@ def add_nurse(request):
         add_nurse = add_nurse_form
 
     return render(request, 'add_nurse.html',{'add_nurse':add_nurse})
+
+def add_disease(request):
+    if request.method == 'POST':
+        add_disease = add_disease_form(request.POST)
+        if add_disease.is_valid():
+            add_disease.save()
+            add_obj = add_disease.instance
+            return render(request, 'add_disease.html', {'add_disease':add_disease, 'add_obj':add_obj})
+    else:
+        add_disease = add_disease_form
+    return render(request, 'add_disease.html',{'add_disease':add_disease})
 
 def manage_nurse(request):
     results = Nurse.objects.all()
@@ -122,9 +134,12 @@ def updatePatient(request, patient_id):
     return render(request, 'edit_patient.html', {'form':form})
 
 def deletePatient(request, patient_id):
+    
     patient = Patient.objects.get(patient_id = patient_id)
     context = {'delete_obj':patient}
     if request.method == 'POST':
         patient.delete()
         return redirect('manage_patient')
     return render(request, 'delete_patient.html', context)
+
+

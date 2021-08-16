@@ -19,7 +19,7 @@
 </head>
 <body>
   <div class="container p-3 my-3 bg-primary text-white">
-    <h1>CALCULATE PATIENT WOUND SIZE</h1>
+    <h1>ADD DISEASE</h1>
     <p>Patient wound size monitoring System using image processing technique</p>
     <a href="{% url 'index' %}"><button type="button" class="btn btn-success">CALCULATE PIXEL</button></a>
     <a href="{% url 'add_patient' %}"><button type="button" class="btn btn-secondary">ADD PATIENTS</button></a>
@@ -29,27 +29,22 @@
     <a href="{% url 'search_data' %}"><button type="button" class="btn btn-secondary">Search</button></a>
     <a href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-secondary">Manage nurse</button></a>
     <a href="{% url 'manage_patient' %}"><button type="button" class="btn btn-secondary">Manage patient</button></a>
-    
   </div>
 <div class="container">
   <div class="row">
     <div class="col">
       <form method="post" enctype="multipart/form-data" >
       {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit" class="btn btn-outline-success">Upload and Calculate</button>
+      {{ add_disease.as_p }}
+      <button type="submit" class="btn btn-outline-success">ADD</button>
       </form>
     </div>
     <div class="col">
-      {% if img_obj %}
+      {% if add_obj %}
         <h3>Succesfully uploaded !! </h3>
-        <p class="text-primary">PatientID is : {{img_obj.patient_id}}</p>
-        <h5> Value of ROI : {{img_obj.img_value}} </h5>
-        <p class="text-info">Title of lesion : {{img_obj.title}}</p>
-        <p class="text-warning">URL is : {{img_obj.image.url}}</p>
-        <p class="text-warning">PATH is : {{img_obj.image.path}}</p>
-  
-        <img src="{{ img_obj.image.url}}" alt="connect" class="mx-auto d-block" style="width : 30%">
+        <p class="text-primary">Disease ID is : {{add_obj.Disease_id}}</p>
+        <p class="text-info">Disease name : {{add_obj.Disease_name}}</p>
+        
       {% endif %}
     </div>
   </div>

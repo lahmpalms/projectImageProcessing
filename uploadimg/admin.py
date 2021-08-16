@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Image, Patient, HealthWelfare, Care, Lesion, LesionStatus, Nurse
+from .models import Image, Patient, HealthWelfare, Care, Lesion, LesionStatus, Nurse, Disease
 
 # Register your models here.
 
@@ -11,3 +11,4 @@ admin.site.register(Care)
 admin.site.register(Lesion)
 admin.site.register(LesionStatus)
 admin.site.register(Nurse)
+admin.site.register(Disease)

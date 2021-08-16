@@ -35,6 +35,7 @@ urlpatterns = [
     path('delete_nurse/<str:nurse_id>',views.deleteNurse, name='delete_nurse'),
     path('search/',views.search, name='search_data'),
     path('care/',views.add_care, name='add_care'),
+    path('add_disease/',views.add_disease, name='add_disease'),
 ]
 
 if settings.DEBUG:

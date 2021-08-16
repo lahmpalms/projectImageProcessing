@@ -52,6 +52,7 @@
                     <th> GENDER </th>
                     <th> BIRTHDAY </th>
                     <th> HEALTHWELFARE </th>
+                    <th> DISEASE </th>
                     <th> Manage </th>
                 </tr>
                 
@@ -63,6 +64,7 @@
                     <td> {{result.gender}} </td>
                     <td> {{result.birthday}} </td>
                     <td> {{result.HealthWelfare.HealthWelfare_name}} </td>
+                    <td> {{result.Disease_id.Disease_name}} </td>
                     <td> 
                         <a href="{% url 'update_patient' result.patient_id %}"><button type="button" class="btn btn-warning"> Edit </button></a>
                         <a href="{% url 'delete_patient' result.patient_id %}"> <button type="button" class="btn btn-danger"> Delete </button> </a>

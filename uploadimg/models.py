@@ -6,6 +6,13 @@ from django.utils import timezone
 
 # Create your models here.
 
+class Disease(models.Model):
+    Disease_id = models.CharField(max_length = 5)
+    Disease_name = models.CharField(max_length = 255)
+    
+    def __str__(self):
+        return self.Disease_name
+    
 
 class HealthWelfare(models.Model):
     HealthWelfare_ID = models.CharField(max_length=3)
@@ -30,6 +37,7 @@ class Patient(models.Model):
     last_name = models.CharField(max_length=200)
     gender = models.CharField(max_length=6,choices=GENDER_CHOICES)
     birthday = models.DateField()
+    Disease_id = models.ForeignKey (Disease, null = True, on_delete = CASCADE)
     HealthWelfare = models.ForeignKey(HealthWelfare,null=True ,on_delete= CASCADE)
 
     def __str__(self):
