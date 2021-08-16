@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.utils.translation import deactivate
 from numpy.lib.type_check import imag
 from uploadimg.forms import ImageForm ,add_patient_form, add_care_form, add_nurse_form, add_disease_form
-from .models import Care, Nurse, Patient
+from .models import Care, Nurse, Patient, Disease
 
 from uploadimg.utils import Calculate , bitwise
 from skimage.morphology import black_tophat, skeletonize, convex_hull_image
@@ -29,7 +29,6 @@ def index(request):
         form = ImageForm()
     return render(request, 'index.html', {'form': form})
 
-# ADD OBJECT
 def add_patients(request):
     if request.method == 'POST':
         add_patient = add_patient_form(request.POST)
@@ -96,6 +95,10 @@ def manage_patient(request):
             return render(request, 'manage_patient.html', {'results':search_results})
     return render(request, 'manage_patient.html', {'results':results})
 
+def manage_disease(request):
+    results = Disease.objects.all()
+    return render(request, 'manage_disease.html', {'results':results})
+
 def search(request):
     if request.method == "POST":
         query_name = request.POST.get('name', None)
@@ -142,4 +145,22 @@ def deletePatient(request, patient_id):
         return redirect('manage_patient')
     return render(request, 'delete_patient.html', context)
 
+def updateDisease(request, Disease_id):
+    disease = Disease.objects.get(Disease_id = Disease_id)
+    form = add_disease_form(instance=disease)
+    if request.method == 'POST':
+        form = add_disease_form(request.POST, instance=disease)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_disease')
+    return render(request, 'edit_disease.html', {'form':form})
+
+def deleteDisease(request, Disease_id):
+    
+    disease = Disease.objects.get(Disease_id = Disease_id)
+    context = {'delete_obj':disease}
+    if request.method == 'POST':
+        disease.delete()
+        return redirect('manage_disease')
+    return render(request, 'delete_disease.html', context)
 

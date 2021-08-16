@@ -36,6 +36,9 @@ urlpatterns = [
     path('search/',views.search, name='search_data'),
     path('care/',views.add_care, name='add_care'),
     path('add_disease/',views.add_disease, name='add_disease'),
+    path('manage_disease/',views.manage_disease, name='manage_disease'),
+    path('update_disease/<str:Disease_id>',views.updateDisease, name='update_disease'),
+    path('delete_disease/<str:Disease_id>',views.deleteDisease, name='delete_disease'),
 ]
 
 if settings.DEBUG:

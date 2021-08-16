@@ -19,30 +19,15 @@
 </head>
 <body>
   <div class="container p-3 my-3 bg-primary text-white">
-    <h1>ADD DISEASE</h1>
+    <h1>EDIT Disease</h1>
     <p>Patient wound size monitoring System using image processing technique</p>
-    <a href="{% url 'index' %}"><button type="button" class="btn btn-success">CALCULATE PIXEL</button></a>
-    <a href="{% url 'manage_disease' %}"><button type="button" class="btn btn-secondary">Manage disease</button></a>
   </div>
 <div class="container">
-  <div class="row">
-    <div class="col">
       <form method="post" enctype="multipart/form-data" >
       {% csrf_token %}
-      {{ add_disease.as_p }}
-      <button type="submit" class="btn btn-outline-success">ADD</button>
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-outline-success" value="Update">Update</button>
       </form>
-    </div>
-    <div class="col">
-      {% if add_obj %}
-        <h3>Succesfully uploaded !! </h3>
-        <p class="text-primary">Disease ID is : {{add_obj.Disease_id}}</p>
-        <p class="text-info">Disease name : {{add_obj.Disease_name}}</p>
-        
-      {% endif %}
-    </div>
-  </div>
 </div>
-</form>
 </body>
 </html>
