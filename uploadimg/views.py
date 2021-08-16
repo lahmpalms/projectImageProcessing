@@ -100,8 +100,7 @@ def updateNurse(request, nurse_id):
         form = add_nurse_form(request.POST, instance=nurse)
         if form.is_valid():
             form.save()
-            update_obj = form.instance
-            return render(request, 'edit_nurse.html',{'form':form,'update_obj':update_obj})
+            return redirect('manage_nurse')
     return render(request, 'edit_nurse.html', {'form':form})
 
 def deleteNurse(request, nurse_id):
@@ -111,3 +110,13 @@ def deleteNurse(request, nurse_id):
         nurse.delete()
         return redirect('manage_nurse')
     return render(request, 'delete_nurse.html', context)
+
+def updatePatient(request, patient_id):
+    patient = Patient.objects.get(patient_id = patient_id)
+    form = add_patient_form(instance=patient)
+    if request.method == 'POST':
+        form = add_patient_form(request.POST, instance=patient)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_patient')
+    return render(request, 'edit_patient.html', {'form':form})
