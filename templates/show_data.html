@@ -54,6 +54,7 @@
                     <th> DETAILS </th>
                     <th> IMAGE </th>
                     <th> SIZE </th>
+                    <th> LESION STATUS </th>
                 </tr>
                 {% for result in results %}
                 <tr>
@@ -66,6 +67,7 @@
                     <!-- <img src="{{ result.image.url}}" alt="connect" class="mx-auto d-block" style="width : 30%">
                     <td> {{result.image}}</td> -->
                     <td> {{result.size}} </td>
+                    <td> {{result.lesion_statusid.lesion_statusname}} </td>
                 </tr>
                 {% endfor %}
             </table>
