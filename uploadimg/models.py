@@ -58,6 +58,7 @@ class Nurse(models.Model):
         return self.nurse_id + " " + self.first_name + " " + self.last_name
 
 class Care(models.Model):
+    
     patient_id = models.ForeignKey(Patient, null=True,on_delete= CASCADE)
     care_date = models.DateField(default=timezone.now)
     lesion_id = models.CharField(max_length=5,primary_key=True)
