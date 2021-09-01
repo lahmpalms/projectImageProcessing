@@ -3,6 +3,7 @@ from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.utils.translation import deactivate
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from numpy.lib.type_check import imag
 from uploadimg.forms import ImageForm ,add_patient_form, add_care_form, add_nurse_form, add_disease_form, add_disease_form, add_healthwelfare_form, CreateUserForm
@@ -209,5 +210,21 @@ def registerPage(request):
     return render (request, 'register.html',context)
 
 def loginPage(request):
+    
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        user = authenticate(request, username = username, password = password)
+        
+        if user is not None:
+            login(request, user)
+            return redirect ('index')
+        else:
+            messages.info(request, 'Username or Password inccorrect!!')
+            
     context = {}
     return render (request, 'login.html',context)
+
+def logoutUser(request):
+    return redirect('login')
