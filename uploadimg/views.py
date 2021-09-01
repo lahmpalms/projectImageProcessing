@@ -2,8 +2,10 @@ from django.db.models import query
 from django.http.response import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.utils.translation import deactivate
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 from numpy.lib.type_check import imag
-from uploadimg.forms import ImageForm ,add_patient_form, add_care_form, add_nurse_form, add_disease_form, add_disease_form, add_healthwelfare_form
+from uploadimg.forms import ImageForm ,add_patient_form, add_care_form, add_nurse_form, add_disease_form, add_disease_form, add_healthwelfare_form, CreateUserForm
 from .models import Care, Nurse, Patient, Disease, HealthWelfare
 
 from uploadimg.utils import Calculate , bitwise
@@ -194,3 +196,18 @@ def deleteHealthwelfare(request, HealthWelfare_ID):
         healthwelfare.delete()
         return redirect('manage_healthwelfare')
     return render(request, 'delete_healthwelfare.html', context)
+
+def registerPage(request):
+    form = CreateUserForm()
+    
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    context = {'form' : form}
+    return render (request, 'register.html',context)
+
+def loginPage(request):
+    context = {}
+    return render (request, 'login.html',context)
