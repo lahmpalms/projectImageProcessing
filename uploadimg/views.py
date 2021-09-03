@@ -5,6 +5,8 @@ from django.utils.translation import deactivate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 from numpy.lib.type_check import imag
 from uploadimg.forms import ImageForm ,add_patient_form, add_care_form, add_nurse_form, add_disease_form, add_disease_form, add_healthwelfare_form, CreateUserForm
 from .models import Care, Nurse, Patient, Disease, HealthWelfare
@@ -17,6 +19,7 @@ import numpy as np
 import cv2
 # Create your views here.
 
+@login_required(login_url = 'login')
 def index(request):
 
     if request.method == 'POST':
@@ -31,7 +34,7 @@ def index(request):
     else:
         form = ImageForm()
     return render(request, 'index.html', {'form': form})
-
+@login_required(login_url = 'login')
 def add_patients(request):
     if request.method == 'POST':
         add_patient = add_patient_form(request.POST)
@@ -42,7 +45,7 @@ def add_patients(request):
     else:
         add_patient = add_patient_form()
     return render(request, 'add_patient.html',{'add_patient':add_patient})
-
+@login_required(login_url = 'login')
 def add_care(request):
     if request.method == 'POST':
         add_care = add_care_form(request.POST, request.FILES)
@@ -56,7 +59,7 @@ def add_care(request):
     else:
         add_care = add_care_form()
     return render(request, 'add_care.html',{'add_care':add_care})
-
+@login_required(login_url = 'login')
 def add_nurse(request):
     if request.method == 'POST':
         add_nurse = add_nurse_form(request.POST)
@@ -68,7 +71,7 @@ def add_nurse(request):
         add_nurse = add_nurse_form
 
     return render(request, 'add_nurse.html',{'add_nurse':add_nurse})
-
+@login_required(login_url = 'login')
 def add_disease(request):
     if request.method == 'POST':
         add_disease = add_disease_form(request.POST)
@@ -79,7 +82,7 @@ def add_disease(request):
     else:
         add_disease = add_disease_form
     return render(request, 'add_disease.html',{'add_disease':add_disease})
-
+@login_required(login_url = 'login')
 def add_healthWelfare(request):
     if request.method == 'POST':
         add_healthwelfare = add_healthwelfare_form(request.POST)
@@ -90,7 +93,7 @@ def add_healthWelfare(request):
     else:
         add_healthwelfare = add_healthwelfare_form
     return render(request, 'add_healthwelfare.html',{'add_healthwelfare':add_healthwelfare})
-
+@login_required(login_url = 'login')
 def manage_nurse(request):
     results = Nurse.objects.all()
     if request.method == "POST":
@@ -99,7 +102,7 @@ def manage_nurse(request):
             search_results = Nurse.objects.filter(first_name__contains = query_name)
             return render(request, 'manage_nurse.html', {'results':search_results})
     return render(request, 'manage_nurse.html', {'results':results})
-
+@login_required(login_url = 'login')
 def manage_patient(request):
     results = Patient.objects.all()
     if request.method == "POST":
@@ -108,15 +111,15 @@ def manage_patient(request):
             search_results = Patient.objects.filter(first_name__contains = query_name)
             return render(request, 'manage_patient.html', {'results':search_results})
     return render(request, 'manage_patient.html', {'results':results})
-
+@login_required(login_url = 'login')
 def manage_disease(request):
     results = Disease.objects.all()
     return render(request, 'manage_disease.html', {'results':results})
-
+@login_required(login_url = 'login')
 def manage_healthWelfare(request):
     results = HealthWelfare.objects.all()
     return render(request, 'manage_healthwelfare.html', {'results':results})
-
+@login_required(login_url = 'login')
 def search(request):
     if request.method == "POST":
         query_name = request.POST.get('name', None)
@@ -125,7 +128,7 @@ def search(request):
             return render(request, 'show_data.html', {"results":results})
 
     return render(request, 'show_data.html')
-
+@login_required(login_url = 'login')
 def updateNurse(request, nurse_id):
     nurse = Nurse.objects.get(nurse_id = nurse_id)
     form = add_nurse_form(instance=nurse)
@@ -135,7 +138,7 @@ def updateNurse(request, nurse_id):
             form.save()
             return redirect('manage_nurse')
     return render(request, 'edit_nurse.html', {'form':form})
-
+@login_required(login_url = 'login')
 def deleteNurse(request, nurse_id):
     nurse = Nurse.objects.get(nurse_id = nurse_id)
     context = {'delete_obj':nurse}
@@ -143,7 +146,7 @@ def deleteNurse(request, nurse_id):
         nurse.delete()
         return redirect('manage_nurse')
     return render(request, 'delete_nurse.html', context)
-
+@login_required(login_url = 'login')
 def updatePatient(request, patient_id):
     patient = Patient.objects.get(patient_id = patient_id)
     form = add_patient_form(instance=patient)
@@ -153,7 +156,7 @@ def updatePatient(request, patient_id):
             form.save()
             return redirect('manage_patient')
     return render(request, 'edit_patient.html', {'form':form})
-
+@login_required(login_url = 'login')
 def deletePatient(request, patient_id):
     patient = Patient.objects.get(patient_id = patient_id)
     context = {'delete_obj':patient}
@@ -161,7 +164,7 @@ def deletePatient(request, patient_id):
         patient.delete()
         return redirect('manage_patient')
     return render(request, 'delete_patient.html', context)
-
+@login_required(login_url = 'login')
 def updateDisease(request, Disease_id):
     disease = Disease.objects.get(Disease_id = Disease_id)
     form = add_disease_form(instance=disease)
@@ -171,7 +174,7 @@ def updateDisease(request, Disease_id):
             form.save()
             return redirect('manage_disease')
     return render(request, 'edit_disease.html', {'form':form})
-
+@login_required(login_url = 'login')
 def deleteDisease(request, Disease_id):
     disease = Disease.objects.get(Disease_id = Disease_id)
     context = {'delete_obj':disease}
@@ -179,7 +182,7 @@ def deleteDisease(request, Disease_id):
         disease.delete()
         return redirect('manage_disease')
     return render(request, 'delete_disease.html', context)
-
+@login_required(login_url = 'login')
 def updateHealthwelfare(request, HealthWelfare_ID):
     healthwelfare = HealthWelfare.objects.get(HealthWelfare_ID = HealthWelfare_ID)
     form = add_healthwelfare_form(instance=healthwelfare)
@@ -189,7 +192,7 @@ def updateHealthwelfare(request, HealthWelfare_ID):
             form.save()
             return redirect('manage_healthwelfare')
     return render(request, 'edit_healthwelfare.html', {'form':form})
-
+@login_required(login_url = 'login')
 def deleteHealthwelfare(request, HealthWelfare_ID):
     healthwelfare = HealthWelfare.objects.get(HealthWelfare_ID = HealthWelfare_ID)
     context = {'delete_obj':healthwelfare}
@@ -227,4 +230,5 @@ def loginPage(request):
     return render (request, 'login.html',context)
 
 def logoutUser(request):
+    logout(request)
     return redirect('login')
