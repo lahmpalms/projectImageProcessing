@@ -31,7 +31,6 @@
         <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
       Admin Menu
     </button>
-<<<<<<< HEAD
     <div class="dropdown-menu">
       <a class="dropdown-item" href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-secondary">Manage nurse</button></a>
       <a class="dropdown-item" href="{% url 'manage_patient' %}"><button type="button" class="btn btn-secondary">Manage patient</button></a>
@@ -40,8 +39,7 @@
     </div>
     <span> Hello, {{request.user}}</span>
     <a href="{% url 'logout' %}"><button type="button" class="btn btn-danger">Logout</button></a>
-    
-  </div>
+    </div>
 <div class="container">
   <div class="row">
     <div class="col">
@@ -50,38 +48,13 @@
       {{ form.as_p }}
       <button type="submit" class="btn btn-outline-success">Upload and Calculate</button>
       </form>
-=======
         <div class="dropdown-menu">
             <a class="dropdown-item" href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-secondary">Manage nurse</button></a>
             <a class="dropdown-item" href="{% url 'manage_patient' %}"><button type="button" class="btn btn-secondary">Manage patient</button></a>
             <a class="dropdown-item" href="{% url 'manage_disease' %}"><button type="button" class="btn btn-secondary">Manage disease</button></a>
             <a class="dropdown-item" href="{% url 'manage_healthwelfare' %}"><button type="button" class="btn btn-secondary">Manage healthwelfare</button></a>
         </div>
-
->>>>>>> 1cf7d21a39ad80dfaec35bd880e77fc66f2e51ec
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %} {{ form.as_p }}
-                    <button type="submit" class="btn btn-outline-success">Upload and Calculate</button>
-                </form>
-            </div>
-            <div class="col">
-                {% if img_obj %}
-                <h3>Succesfully uploaded !! </h3>
-                <p class="text-primary">PatientID is : {{img_obj.patient_id}}</p>
-                <h5> Value of ROI : {{img_obj.img_value}} </h5>
-                <p class="text-info">Title of lesion : {{img_obj.title}}</p>
-                <p class="text-warning">URL is : {{img_obj.image.url}}</p>
-                <p class="text-warning">PATH is : {{img_obj.image.path}}</p>
-
-                <img src="{{ img_obj.image.url}}" alt="connect" class="mx-auto d-block" style="width : 30%"> {% endif %}
-            </div>
-        </div>
-    </div>
-    </form>
 
 </body>
 
