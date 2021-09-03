@@ -1,63 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <title>Calculate Patient wound size</title>
 
-  <style>
-    h3{ 
-      color: green;
-    }
-    h5{ 
-      color: blue;
-    }
-  </style>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Calculate Patient wound size</title>
+
+    <style>
+        h3 {
+            color: green;
+        }
+        
+        h5 {
+            color: blue;
+        }
+    </style>
 </head>
+
 <body>
-  <div class="container p-3 my-3 bg-primary text-white">
-    <h1>CALCULATE PATIENT WOUND SIZE</h1>
-    <p>Patient wound size monitoring System using image processing technique</p>
-    <a href="{% url 'index' %}"><button type="button" class="btn btn-success">CALCULATE PIXEL</button></a>
-    <a href="{% url 'search_data' %}"><button type="button" class="btn btn-secondary">Search</button></a>
-    <a href="{% url 'add_care' %}"><button type="button" class="btn btn-secondary">Add Care</button></a>
-    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+    <div class="container p-3 my-3 bg-primary text-white">
+        <h1>CALCULATE PATIENT WOUND SIZE</h1>
+        <p>Patient wound size monitoring System using image processing technique</p>
+        <a href="{% url 'index' %}"><button type="button" class="btn btn-success">CALCULATE PIXEL</button></a>
+        <a href="{% url 'search_data' %}"><button type="button" class="btn btn-secondary">Search</button></a>
+        <a href="{% url 'add_care' %}"><button type="button" class="btn btn-secondary">Add Care</button></a>
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
       Admin Menu
     </button>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-secondary">Manage nurse</button></a>
-      <a class="dropdown-item" href="{% url 'manage_patient' %}"><button type="button" class="btn btn-secondary">Manage patient</button></a>
-      <a class="dropdown-item" href="{% url 'manage_disease' %}"><button type="button" class="btn btn-secondary">Manage disease</button></a>
-      <a class="dropdown-item" href="{% url 'manage_healthwelfare' %}"><button type="button" class="btn btn-secondary">Manage healthwelfare</button></a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-secondary">Manage nurse</button></a>
+            <a class="dropdown-item" href="{% url 'manage_patient' %}"><button type="button" class="btn btn-secondary">Manage patient</button></a>
+            <a class="dropdown-item" href="{% url 'manage_disease' %}"><button type="button" class="btn btn-secondary">Manage disease</button></a>
+            <a class="dropdown-item" href="{% url 'manage_healthwelfare' %}"><button type="button" class="btn btn-secondary">Manage healthwelfare</button></a>
+        </div>
+
     </div>
-    
-  </div>
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <form method="post" enctype="multipart/form-data" >
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit" class="btn btn-outline-success">Upload and Calculate</button>
-      </form>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %} {{ form.as_p }}
+                    <button type="submit" class="btn btn-outline-success">Upload and Calculate</button>
+                </form>
+            </div>
+            <div class="col">
+                {% if img_obj %}
+                <h3>Succesfully uploaded !! </h3>
+                <p class="text-primary">PatientID is : {{img_obj.patient_id}}</p>
+                <h5> Value of ROI : {{img_obj.img_value}} </h5>
+                <p class="text-info">Title of lesion : {{img_obj.title}}</p>
+                <p class="text-warning">URL is : {{img_obj.image.url}}</p>
+                <p class="text-warning">PATH is : {{img_obj.image.path}}</p>
+
+                <img src="{{ img_obj.image.url}}" alt="connect" class="mx-auto d-block" style="width : 30%"> {% endif %}
+            </div>
+        </div>
     </div>
-    <div class="col">
-      {% if img_obj %}
-        <h3>Succesfully uploaded !! </h3>
-        <p class="text-primary">PatientID is : {{img_obj.patient_id}}</p>
-        <h5> Value of ROI : {{img_obj.img_value}} </h5>
-        <p class="text-info">Title of lesion : {{img_obj.title}}</p>
-        <p class="text-warning">URL is : {{img_obj.image.url}}</p>
-        <p class="text-warning">PATH is : {{img_obj.image.path}}</p>
-  
-        <img src="{{ img_obj.image.url}}" alt="connect" class="mx-auto d-block" style="width : 30%">
-      {% endif %}
-    </div>
-  </div>
-</div>
-</form>
+    </form>
+    <h1> FEW </h1>
 </body>
+
 </html>
