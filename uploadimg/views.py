@@ -19,7 +19,7 @@ import numpy as np
 import cv2
 # Create your views here.
 
-@login_required(login_url = 'login')
+
 def index(request):
 
     if request.method == 'POST':
@@ -222,7 +222,7 @@ def loginPage(request):
         
         if user is not None:
             login(request, user)
-            return redirect ('index')
+            return redirect ('add_care')
         else:
             messages.info(request, 'Username or Password inccorrect!!')
             
@@ -231,4 +231,4 @@ def loginPage(request):
 
 def logoutUser(request):
     logout(request)
-    return redirect('login')
+    return redirect('index')

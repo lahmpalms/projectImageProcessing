@@ -29,6 +29,17 @@
     <a href="{% url 'search_data' %}"><button type="button" class="btn btn-secondary">Search</button></a>
     <a href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-secondary">Manage nurse</button></a>
     <a href="{% url 'manage_patient' %}"><button type="button" class="btn btn-secondary">Manage patient</button></a>
+    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+      Admin Menu
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-secondary">Manage nurse</button></a>
+      <a class="dropdown-item" href="{% url 'manage_patient' %}"><button type="button" class="btn btn-secondary">Manage patient</button></a>
+      <a class="dropdown-item" href="{% url 'manage_disease' %}"><button type="button" class="btn btn-secondary">Manage disease</button></a>
+      <a class="dropdown-item" href="{% url 'manage_healthwelfare' %}"><button type="button" class="btn btn-secondary">Manage healthwelfare</button></a>
+    </div>
+    <span> Hello, {{request.user}}</span>
+    <a href="{% url 'logout' %}"><button type="button" class="btn btn-danger">Logout</button></a>
   </div>
 <div class="container">
   <div class="row">
