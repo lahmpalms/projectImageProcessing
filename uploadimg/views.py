@@ -128,6 +128,7 @@ def search(request):
             return render(request, 'show_data.html', {"results":results})
 
     return render(request, 'show_data.html')
+
 @login_required(login_url = 'login')
 def updateNurse(request, nurse_id):
     nurse = Nurse.objects.get(nurse_id = nurse_id)
