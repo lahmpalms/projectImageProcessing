@@ -1,40 +1,103 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <title>Calculate Patient wound size</title>
+{% load static %}
+<!doctype html>
+<html lang="en">
 
-        <style>
-            table {
-                font-family: arial, sans-serif;
-                border-collapse: collapse;
-                width: 100%;
-              }
-              
-              td, th {
-                border: 1px solid #dddddd;
-                text-align: left;
-                padding: 8px;
-              }
-              
-              tr:nth-child(even) {
-                background-color: #dddddd;
-              }
-        </style>
-    </head>
-    <body>
-        <div class="container p-3 my-3 bg-primary text-white">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Manage Patient</title>
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link href="{% static 'website/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'website/css/bootstrap-icons.css' %}" rel="stylesheet">
+
+    <link href="{% static 'website/css/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'website/css/owl.theme.default.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'website/css/templatemo-medic-care.css' %}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Calculate Patient wound size</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+    <!--
+
+TemplateMo 566 Medic Care
+
+https://templatemo.com/tm-566-medic-care
+
+-->
+</head>
+
+<body id="top">
+
+    <main>
+
+        <nav class="navbar navbar-expand-lg bg-light fixed-top shadow-lg">
+            <div class="container">
+                <a class="navbar-brand mx-auto d-lg-none" href="{% url 'index' %}">
+                        Medic Care
+                        <strong class="d-block">Health Specialist</strong>
+                    </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <span> Admin Page</span>
+                            <!-- <a class="nav-link" href="{% url 'logout' %}">Logout</a> -->
+                        </li>
+                        <a class="navbar-brand d-none d-lg-block" href="">
+                                Medic Care
+                                <strong class="d-block">Patient wound size monitoring System</strong>
+                            </a>
+                        <li class="nav-item">
+                            <span> Hello, {{request.user}}</span>
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+        <div class="container p-3 my-3 border">
             <h1> Manage Patient</h1>
             <p>Patient wound size monitoring System using image processing technique</p>
-            <a href="{% url 'index' %}"><button type="button" class="btn btn-success">CALCULATE PIXEL</button></a>
-            <a href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-secondary">Manage nurse</button></a>
-            <a href="{% url 'manage_patient' %}"><button type="button" class="btn btn-secondary">Manage patient</button></a>
-            <a href="{% url 'manage_disease' %}"><button type="button" class="btn btn-secondary">Manage disease</button></a>
-            <a href="{% url 'manage_healthwelfare' %}"><button type="button" class="btn btn-secondary">Manage healthwelfare</button></a>
+
         </div>
         <div class="container">
             <form method="POST">
@@ -42,9 +105,9 @@
                 <input name='name' type="text" placeholder="Search" class="form-control form-control-lg" />
                 <button type="submit" class="btn btn-primary btn-lg btn-block"> Search </button>
             </form>
-            <a href="{% url 'add_patient' %}"><button type="button" class="btn btn-success">ADD PATIENTS</button></a>
+
             <table>
-                <tr> 
+                <tr>
                     <th> HN </th>
                     <th> FIRSTNAME </th>
                     <th> LASTNAME </th>
@@ -54,7 +117,7 @@
                     <th> DISEASE </th>
                     <th> Manage </th>
                 </tr>
-                
+
                 {% for result in results %}
                 <tr>
                     <td> {{result.patient_id}} </td>
@@ -64,7 +127,7 @@
                     <td> {{result.birthday}} </td>
                     <td> {{result.HealthWelfare.HealthWelfare_name}} </td>
                     <td> {{result.Disease_id.Disease_name}} </td>
-                    <td> 
+                    <td>
                         <a href="{% url 'update_patient' result.patient_id %}"><button type="button" class="btn btn-warning"> Edit </button></a>
                         <a href="{% url 'delete_patient' result.patient_id %}"> <button type="button" class="btn btn-danger"> Delete </button> </a>
                     </td>
@@ -72,5 +135,105 @@
                 {% endfor %}
             </table>
         </div>
-    </body>
+
+    </main>
+
+
+
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="{% static 'website/js/jquery.min.js' %}"></script>
+    <script src="{% static 'website/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'website/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'website/js/scrollspy.min.js' %}"></script>
+    <script src="{% static 'website/js/custom.js' %}"></script>
+    <!--
+
+TemplateMo 566 Medic Care
+
+https://templatemo.com/tm-566-medic-care
+
+-->
+</body>
+
 </html>
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Calculate Patient wound size</title>
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container p-3 my-3 bg-primary text-white">
+        <h1> Manage Patient</h1>
+        <p>Patient wound size monitoring System using image processing technique</p>
+        <a href="{% url 'index' %}"><button type="button" class="btn btn-success">CALCULATE PIXEL</button></a>
+        <a href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-secondary">Manage nurse</button></a>
+        <a href="{% url 'manage_patient' %}"><button type="button" class="btn btn-secondary">Manage patient</button></a>
+        <a href="{% url 'manage_disease' %}"><button type="button" class="btn btn-secondary">Manage disease</button></a>
+        <a href="{% url 'manage_healthwelfare' %}"><button type="button" class="btn btn-secondary">Manage healthwelfare</button></a>
+    </div>
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            <input name='name' type="text" placeholder="Search" class="form-control form-control-lg" />
+            <button type="submit" class="btn btn-primary btn-lg btn-block"> Search </button>
+        </form>
+        <a href="{% url 'add_patient' %}"><button type="button" class="btn btn-success">ADD PATIENTS</button></a>
+        <table>
+            <tr>
+                <th> HN </th>
+                <th> FIRSTNAME </th>
+                <th> LASTNAME </th>
+                <th> GENDER </th>
+                <th> BIRTHDAY </th>
+                <th> HEALTHWELFARE </th>
+                <th> DISEASE </th>
+                <th> Manage </th>
+            </tr>
+
+            {% for result in results %}
+            <tr>
+                <td> {{result.patient_id}} </td>
+                <td> {{result.first_name}} </td>
+                <td> {{result.last_name}} </td>
+                <td> {{result.gender}} </td>
+                <td> {{result.birthday}} </td>
+                <td> {{result.HealthWelfare.HealthWelfare_name}} </td>
+                <td> {{result.Disease_id.Disease_name}} </td>
+                <td>
+                    <a href="{% url 'update_patient' result.patient_id %}"><button type="button" class="btn btn-warning"> Edit </button></a>
+                    <a href="{% url 'delete_patient' result.patient_id %}"> <button type="button" class="btn btn-danger"> Delete </button> </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+
+</html> -->
