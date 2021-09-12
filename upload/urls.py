@@ -27,6 +27,8 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('register/', views.registerPage, name='register'),
     path('login/', views.loginPage, name='login'),
+    path('admin-login/', views.AdminloginPage, name='Adminlogin'),
+    path('admin-page/', views.AdminPage, name='AdminPage'),
     path('logout/', views.logoutUser, name='logout'),
     #patient
     path('add_patient/',views.add_patients, name='add_patient'),

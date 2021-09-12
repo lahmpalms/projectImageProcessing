@@ -1,0 +1,198 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Calculate Patient wound size</title>
+
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link href="{% static 'website/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'website/css/bootstrap-icons.css' %}" rel="stylesheet">
+
+    <link href="{% static 'website/css/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'website/css/owl.theme.default.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'website/css/templatemo-medic-care.css' %}" rel="stylesheet">
+    <!--
+
+TemplateMo 566 Medic Care
+
+https://templatemo.com/tm-566-medic-care
+
+-->
+</head>
+
+<body id="top">
+
+    <main>
+
+        <nav class="navbar navbar-expand-lg bg-light fixed-top shadow-lg">
+            <div class="container">
+                <a class="navbar-brand mx-auto d-lg-none" href="{% url 'index' %}">
+                        Medic Care
+                        <strong class="d-block">Health Specialist</strong>
+                    </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+
+                        <a class="navbar-brand d-none d-lg-block" href="">
+                                Medic Care
+                                <strong class="d-block">Patient wound size monitoring System</strong>
+                            </a>
+                        <li class="nav-item">
+                          <span> Hello, {{request.user}}</span>
+                          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+        <section class="section-padding" id="about">
+            <div class="row">
+                <div class="col">
+                    <div class="container">
+                        <h1> Patient </h1> 
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a class="nav-link" href="{% url 'add_patient' %}"><button type="button" class="btn btn-success">ADD</button></a>
+                            <a class="nav-link" href="{% url 'manage_patient' %}"><button type="button" class="btn btn-warning">MANAGE</button> </a>
+                        </div>
+                        <h1> Disease </h1> 
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a class="nav-link" href="{% url 'add_disease' %}"><button type="button" class="btn btn-success">ADD</button></a>
+                            <a class="nav-link" href="{% url 'manage_disease' %}"><button type="button" class="btn btn-warning">MANAGE</button> </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="container">
+                        <h1> Nurse </h1> 
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a class="nav-link" href="{% url 'add_nurse' %}"><button type="button" class="btn btn-success">ADD</button></a>
+                            <a class="nav-link" href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-warning">MANAGE</button> </a>
+                        </div>
+                    </div>
+                    <h1> Healthwelfare </h1> 
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a class="nav-link" href="{% url 'add_healthwelfare' %}"><button type="button" class="btn btn-success">ADD</button></a>
+                            <a class="nav-link" href="{% url 'manage_healthwelfare' %}"><button type="button" class="btn btn-warning">MANAGE</button> </a>
+                        </div>
+                </div>
+            </div>        
+        </section>
+    </main>
+
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="{% static 'website/js/jquery.min.js' %}"></script>
+    <script src="{% static 'website/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'website/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'website/js/scrollspy.min.js' %}"></script>
+    <script src="{% static 'website/js/custom.js' %}"></script>
+    <!--
+
+TemplateMo 566 Medic Care
+
+https://templatemo.com/tm-566-medic-care
+
+-->
+</body>
+
+</html>
+
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Calculate Patient wound size</title>
+
+    <style>
+        h3 {
+            color: green;
+        }
+        
+        h5 {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container p-3 my-3 bg-primary text-white">
+        <h1>CARE DETAILS</h1>
+        <p>Patient wound size monitoring System using image processing technique</p>
+        <a href="{% url 'index' %}"><button type="button" class="btn btn-success">CALCULATE PIXEL</button></a>
+        <a href="{% url 'add_patient' %}"><button type="button" class="btn btn-secondary">ADD PATIENTS</button></a>
+        <a href="{% url 'add_nurse' %}"><button type="button" class="btn btn-secondary">ADD NURSE</button></a>
+        <a href="{% url 'add_care' %}"><button type="button" class="btn btn-secondary">ADD CARE</button></a>
+        <a href="{% url 'add_disease' %}"><button type="button" class="btn btn-secondary">ADD DISEASE</button></a>
+        <a href="{% url 'search_data' %}"><button type="button" class="btn btn-secondary">Search</button></a>
+        <a href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-secondary">Manage nurse</button></a>
+        <a href="{% url 'manage_patient' %}"><button type="button" class="btn btn-secondary">Manage patient</button></a>
+        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+      Admin Menu
+    </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-secondary">Manage nurse</button></a>
+            <a class="dropdown-item" href="{% url 'manage_patient' %}"><button type="button" class="btn btn-secondary">Manage patient</button></a>
+            <a class="dropdown-item" href="{% url 'manage_disease' %}"><button type="button" class="btn btn-secondary">Manage disease</button></a>
+            <a class="dropdown-item" href="{% url 'manage_healthwelfare' %}"><button type="button" class="btn btn-secondary">Manage healthwelfare</button></a>
+        </div>
+        <span> Hello, {{request.user}}</span>
+        <a href="{% url 'logout' %}"><button type="button" class="btn btn-danger">Logout</button></a>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %} {{ add_care.as_p }}
+                    <button type="submit" class="btn btn-outline-success">ADD</button>
+                </form>
+            </div>
+            <div class="col">
+                {% if add_obj %}
+                <h3>Succesfully uploaded !! </h3>
+                <p class="text-primary">PatientID is : {{add_obj.patient_id}}</p>
+                <p class="text-primary">Care date is : {{add_obj.care_date}}</p>
+                <p class="text-primary">Lesion ID is : {{add_obj.lesion_id}}</p>
+                <p class="text-primary">Nurse ID is : {{add_obj.nurse_id}}</p>
+                <p class="text-primary">Detail is : {{add_obj.detail}}</p>
+                <p class="text-primary">Lesion Status is : {{add_obj.lesion_statusid.lesion_statusname}}</p>
+                <h5> Value of ROI : {{add_obj.size}} </h5>
+                <p class="text-warning">URL is : {{add_obj.image.url}}</p>
+                <p class="text-warning">PATH is : {{add_obj.image.path}}</p>
+                <img src="{{ add_obj.image.url}}" alt="connect" class="mx-auto d-block" style="width : 30%"> {% endif %}
+            </div>
+        </div>
+    </div>
+    </form>
+</body>
+
+</html> -->
