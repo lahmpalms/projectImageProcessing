@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from upload.decorators import unauthenticated_user, allowed_users
 
 from numpy.lib.type_check import imag
 from uploadimg.forms import ImageForm ,add_patient_form, add_care_form, add_nurse_form, add_disease_form, add_disease_form, add_healthwelfare_form, CreateUserForm
@@ -35,6 +36,7 @@ def index(request):
         form = ImageForm()
     return render(request, 'index.html', {'form': form})
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def add_patients(request):
     if request.method == 'POST':
         add_patient = add_patient_form(request.POST)
@@ -46,6 +48,7 @@ def add_patients(request):
         add_patient = add_patient_form()
     return render(request, 'add_patient.html',{'add_patient':add_patient})
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin', 'nurse'])
 def add_care(request):
     if request.method == 'POST':
         add_care = add_care_form(request.POST, request.FILES)
@@ -60,6 +63,7 @@ def add_care(request):
         add_care = add_care_form()
     return render(request, 'add_care.html',{'add_care':add_care})
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def add_nurse(request):
     if request.method == 'POST':
         add_nurse = add_nurse_form(request.POST)
@@ -72,6 +76,7 @@ def add_nurse(request):
 
     return render(request, 'add_nurse.html',{'add_nurse':add_nurse})
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def add_disease(request):
     if request.method == 'POST':
         add_disease = add_disease_form(request.POST)
@@ -83,6 +88,7 @@ def add_disease(request):
         add_disease = add_disease_form
     return render(request, 'add_disease.html',{'add_disease':add_disease})
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def add_healthWelfare(request):
     if request.method == 'POST':
         add_healthwelfare = add_healthwelfare_form(request.POST)
@@ -94,6 +100,7 @@ def add_healthWelfare(request):
         add_healthwelfare = add_healthwelfare_form
     return render(request, 'add_healthwelfare.html',{'add_healthwelfare':add_healthwelfare})
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def manage_nurse(request):
     results = Nurse.objects.all()
     if request.method == "POST":
@@ -103,6 +110,7 @@ def manage_nurse(request):
             return render(request, 'manage_nurse.html', {'results':search_results})
     return render(request, 'manage_nurse.html', {'results':results})
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def manage_patient(request):
     results = Patient.objects.all()
     if request.method == "POST":
@@ -112,14 +120,17 @@ def manage_patient(request):
             return render(request, 'manage_patient.html', {'results':search_results})
     return render(request, 'manage_patient.html', {'results':results})
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def manage_disease(request):
     results = Disease.objects.all()
     return render(request, 'manage_disease.html', {'results':results})
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def manage_healthWelfare(request):
     results = HealthWelfare.objects.all()
     return render(request, 'manage_healthwelfare.html', {'results':results})
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin', 'nurse'])
 def search(request):
     if request.method == "POST":
         query_name = request.POST.get('name', None)
@@ -128,7 +139,9 @@ def search(request):
             return render(request, 'show_data.html', {"results":results})
 
     return render(request, 'show_data.html')
+
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def updateNurse(request, nurse_id):
     nurse = Nurse.objects.get(nurse_id = nurse_id)
     form = add_nurse_form(instance=nurse)
@@ -139,6 +152,7 @@ def updateNurse(request, nurse_id):
             return redirect('manage_nurse')
     return render(request, 'edit_nurse.html', {'form':form})
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def deleteNurse(request, nurse_id):
     nurse = Nurse.objects.get(nurse_id = nurse_id)
     context = {'delete_obj':nurse}
@@ -147,6 +161,7 @@ def deleteNurse(request, nurse_id):
         return redirect('manage_nurse')
     return render(request, 'delete_nurse.html', context)
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def updatePatient(request, patient_id):
     patient = Patient.objects.get(patient_id = patient_id)
     form = add_patient_form(instance=patient)
@@ -157,6 +172,7 @@ def updatePatient(request, patient_id):
             return redirect('manage_patient')
     return render(request, 'edit_patient.html', {'form':form})
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def deletePatient(request, patient_id):
     patient = Patient.objects.get(patient_id = patient_id)
     context = {'delete_obj':patient}
@@ -165,6 +181,7 @@ def deletePatient(request, patient_id):
         return redirect('manage_patient')
     return render(request, 'delete_patient.html', context)
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def updateDisease(request, Disease_id):
     disease = Disease.objects.get(Disease_id = Disease_id)
     form = add_disease_form(instance=disease)
@@ -175,6 +192,7 @@ def updateDisease(request, Disease_id):
             return redirect('manage_disease')
     return render(request, 'edit_disease.html', {'form':form})
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def deleteDisease(request, Disease_id):
     disease = Disease.objects.get(Disease_id = Disease_id)
     context = {'delete_obj':disease}
@@ -183,6 +201,7 @@ def deleteDisease(request, Disease_id):
         return redirect('manage_disease')
     return render(request, 'delete_disease.html', context)
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def updateHealthwelfare(request, HealthWelfare_ID):
     healthwelfare = HealthWelfare.objects.get(HealthWelfare_ID = HealthWelfare_ID)
     form = add_healthwelfare_form(instance=healthwelfare)
@@ -193,6 +212,7 @@ def updateHealthwelfare(request, HealthWelfare_ID):
             return redirect('manage_healthwelfare')
     return render(request, 'edit_healthwelfare.html', {'form':form})
 @login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def deleteHealthwelfare(request, HealthWelfare_ID):
     healthwelfare = HealthWelfare.objects.get(HealthWelfare_ID = HealthWelfare_ID)
     context = {'delete_obj':healthwelfare}
@@ -201,6 +221,7 @@ def deleteHealthwelfare(request, HealthWelfare_ID):
         return redirect('manage_healthwelfare')
     return render(request, 'delete_healthwelfare.html', context)
 
+@unauthenticated_user
 def registerPage(request):
     form = CreateUserForm()
     
@@ -211,7 +232,7 @@ def registerPage(request):
             return redirect('login')
     context = {'form' : form}
     return render (request, 'register.html',context)
-
+@unauthenticated_user
 def loginPage(request):
     
     if request.method == 'POST':
@@ -232,3 +253,26 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('index')
+
+def AdminloginPage(request):
+    
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        user = authenticate(request, username = username, password = password)
+        
+        if user is not None:
+            login(request, user)
+            return redirect ('AdminPage')
+        else:
+            messages.info(request, 'Username or Password inccorrect!!')
+            
+    context = {}
+    return render (request, 'admin_login.html',context)
+
+@login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
+def AdminPage(request):
+
+    return render(request, 'admin_page.html')
