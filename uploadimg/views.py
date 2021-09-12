@@ -22,19 +22,13 @@ import cv2
 
 
 def index(request):
+    if request.method == "POST":
+        query_name = request.POST.get('name', None)
+        if query_name:
+            results = Care.objects.filter(patient_id__first_name__contains=query_name)
+            return render(request, 'index.html', {"results":results})
 
-    if request.method == 'POST':
-        form = ImageForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            img_obj = form.instance
-            value = Calculate(img_obj.image.path)
-            img_obj.img_value = value
-            form.save()
-            return render(request, 'index.html', {'form': form, 'img_obj': img_obj, 'value':value})
-    else:
-        form = ImageForm()
-    return render(request, 'index.html', {'form': form})
+    return render(request, 'index.html')
 @login_required(login_url = 'login')
 @allowed_users(allowed_roles=['admin'])
 def add_patients(request):
