@@ -34,6 +34,23 @@ TemplateMo 566 Medic Care
 https://templatemo.com/tm-566-medic-care
 
 -->
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
 </head>
 
 <body id="top">
@@ -68,36 +85,38 @@ https://templatemo.com/tm-566-medic-care
             </div>
         </nav>
         <section class="section-padding" id="about">
-            <div class="row">
-                <div class="col">
-                    <div class="container">
-                        <h1> Patient </h1> 
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a class="nav-link" href="{% url 'add_patient' %}"><button type="button" class="btn btn-success">ADD</button></a>
-                            <a class="nav-link" href="{% url 'manage_patient' %}"><button type="button" class="btn btn-warning">MANAGE</button> </a>
-                        </div>
-                        <h1> Disease </h1> 
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a class="nav-link" href="{% url 'add_disease' %}"><button type="button" class="btn btn-success">ADD</button></a>
-                            <a class="nav-link" href="{% url 'manage_disease' %}"><button type="button" class="btn btn-warning">MANAGE</button> </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="container">
-                        <h1> Nurse </h1> 
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a class="nav-link" href="{% url 'add_nurse' %}"><button type="button" class="btn btn-success">ADD</button></a>
-                            <a class="nav-link" href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-warning">MANAGE</button> </a>
-                        </div>
-                    </div>
-                    <h1> Healthwelfare </h1> 
-                        <div class="btn-group" role="group" aria-label="Basic example">
-                            <a class="nav-link" href="{% url 'add_healthwelfare' %}"><button type="button" class="btn btn-success">ADD</button></a>
-                            <a class="nav-link" href="{% url 'manage_healthwelfare' %}"><button type="button" class="btn btn-warning">MANAGE</button> </a>
-                        </div>
-                </div>
-            </div>        
+            <div class="container">
+                <table>
+                    <tr>
+                      <th>Section</th>
+                      <th>ADD tools</th>
+                      <th>Manage tools</th>
+                    </tr>
+                    <tr>
+                        <td>Patients</td>
+                        <td><a class="nav-link" href="{% url 'add_patient' %}"><button type="button" class="btn btn-success">ADD</button></a></td>
+                        <td> <a class="nav-link" href="{% url 'manage_patient' %}"><button type="button" class="btn btn-warning">MANAGE</button></td>
+                    </tr>
+                    <tr>
+                        <td> Disease </td>
+                        <td> <a class="nav-link" href="{% url 'add_disease' %}"><button type="button" class="btn btn-success">ADD</button></a></td>
+                        <td> <a class="nav-link" href="{% url 'manage_disease' %}"><button type="button" class="btn btn-warning">MANAGE</button> </a></td>
+                    </tr>
+                    <tr>
+                        <td> Nurse </td>
+                        <td> <a class="nav-link" href="{% url 'add_nurse' %}"><button type="button" class="btn btn-success">ADD</button></a></td>
+                        <td> <a class="nav-link" href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-warning">MANAGE</button> </a></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Healthwelfare </td>
+                        <td> <a class="nav-link" href="{% url 'add_healthwelfare' %}"><button type="button" class="btn btn-success">ADD</button></a> </td>
+                        <td> <a class="nav-link" href="{% url 'manage_healthwelfare' %}"><button type="button" class="btn btn-warning">MANAGE</button> </a></td>
+                    </tr>
+                </table>
+
+            </div>
+                   
         </section>
     </main>
 
