@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path , include
 from django.urls.conf import include
 from uploadimg import views
 
@@ -30,6 +30,7 @@ urlpatterns = [
     path('admin-login/', views.AdminloginPage, name='Adminlogin'),
     path('admin-page/', views.AdminPage, name='AdminPage'),
     path('logout/', views.logoutUser, name='logout'),
+    path('dashboard/', include('uploadimg.urls')),
     #patient
     path('add_patient/',views.add_patients, name='add_patient'),
     path('manage_patient/',views.manage_patient, name='manage_patient'),

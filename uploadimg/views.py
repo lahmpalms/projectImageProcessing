@@ -12,7 +12,7 @@ from numpy.lib.type_check import imag
 from uploadimg.forms import ImageForm ,add_patient_form, add_care_form, add_nurse_form, add_disease_form, add_disease_form, add_healthwelfare_form, CreateUserForm
 from .models import Care, Nurse, Patient, Disease, HealthWelfare
 
-from uploadimg.utils import Calculate , bitwise
+from uploadimg.utils import Calculate , bitwise, calculate_age
 from skimage.morphology import black_tophat, skeletonize, convex_hull_image
 
 import PIL as Image
@@ -37,6 +37,9 @@ def add_patients(request):
         if add_patient.is_valid():
             add_patient.save()
             add_obj = add_patient.instance
+            age_cal = calculate_age(add_obj.birthday)
+            add_obj.age = age_cal
+            add_patient.save()
             return render(request, 'add_patient.html',{'add_patient':add_patient, 'add_obj':add_obj})
     else:
         add_patient = add_patient_form()
@@ -270,3 +273,18 @@ def AdminloginPage(request):
 def AdminPage(request):
 
     return render(request, 'admin_page.html')
+
+def chart(request):
+    if request.method == "POST":
+        query_name = request.POST.get('name', None)
+        if query_name:
+            results = Care.objects.filter(patient_id__first_name__contains=query_name)
+            return render(request, 'chart.html', {"results":results})
+
+    return render(request, 'chart.html')
+    # data = Care.objects.all()
+    # context = {
+    #     'data' : data
+        
+    # }
+    # return render(request, 'chart.html', context)

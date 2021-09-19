@@ -14,6 +14,11 @@ from skimage.morphology import black_tophat, skeletonize, convex_hull_image
 from skimage.morphology import disk
 from PIL import Image
 
+import datetime
+
+import dateutil
+
+
 
 
 def plot_comparison(original, filtered, filter_name):
@@ -55,6 +60,10 @@ def Calculate(image):
 
 
         return value
+
+def calculate_age(birthday):
+        age = int((datetime.date.today() - birthday).days / 365.25  )
+        return age
 
 
 

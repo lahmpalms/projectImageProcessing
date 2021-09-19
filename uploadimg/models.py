@@ -37,9 +37,9 @@ class Patient(models.Model):
     last_name = models.CharField(max_length=200)
     gender = models.CharField(max_length=6,choices=GENDER_CHOICES)
     birthday = models.DateField()
+    age = models.IntegerField(null = True)
     Disease_id = models.ForeignKey (Disease, null = True, on_delete = CASCADE)
     HealthWelfare = models.ForeignKey(HealthWelfare,null=True ,on_delete= CASCADE)
-
     def __str__(self):
         return self.patient_id + " " + self.first_name + " " + self.last_name
 
