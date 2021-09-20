@@ -34,22 +34,23 @@ TemplateMo 566 Medic Care
 https://templatemo.com/tm-566-medic-care
 
 -->
-<style>
-    table {
-      font-family: arial, sans-serif;
-      border-collapse: collapse;
-      width: 100%;
-    }
-    
-    td, th {
-      border: 1px solid #dddddd;
-      text-align: left;
-      padding: 8px;
-    }
-    
-    tr:nth-child(even) {
-      background-color: #dddddd;
-    }
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
     </style>
 </head>
 
@@ -70,14 +71,29 @@ https://templatemo.com/tm-566-medic-care
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'linechart' %}">
+                                <span> Line chart</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'bubblechart' %}">
+                                <span> Bubble chart</span>
+                            </a>
+                        </li>
 
                         <a class="navbar-brand d-none d-lg-block" href="">
                                 Medic Care
                                 <strong class="d-block">Patient wound size monitoring System</strong>
                             </a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'counthealth' %}">
+                                    <span> Count Healthwelfare</span>
+                                </a>
+                            </li>
                         <li class="nav-item">
-                          <span> Hello, {{request.user}}</span>
-                          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                            <span> Hello, {{request.user}}</span>
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -88,9 +104,9 @@ https://templatemo.com/tm-566-medic-care
             <div class="container">
                 <table>
                     <tr>
-                      <th>Section</th>
-                      <th>ADD tools</th>
-                      <th>Manage tools</th>
+                        <th>Section</th>
+                        <th>ADD tools</th>
+                        <th>Manage tools</th>
                     </tr>
                     <tr>
                         <td>Patients</td>
@@ -106,7 +122,7 @@ https://templatemo.com/tm-566-medic-care
                         <td> Nurse </td>
                         <td> <a class="nav-link" href="{% url 'add_nurse' %}"><button type="button" class="btn btn-success">ADD</button></a></td>
                         <td> <a class="nav-link" href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-warning">MANAGE</button> </a></td>
-                        
+
                     </tr>
                     <tr>
                         <td> Healthwelfare </td>
@@ -116,7 +132,7 @@ https://templatemo.com/tm-566-medic-care
                 </table>
 
             </div>
-                   
+
         </section>
     </main>
 
