@@ -30,7 +30,9 @@ urlpatterns = [
     path('admin-login/', views.AdminloginPage, name='Adminlogin'),
     path('admin-page/', views.AdminPage, name='AdminPage'),
     path('logout/', views.logoutUser, name='logout'),
-    path('dashboard/', include('uploadimg.urls')),
+    path('dashboard/', views.chart, name = 'linechart'),
+    path('dashboard2/', views.chart2, name = 'bubblechart'),
+    path('counthealth/', views.count_health, name = 'counthealth'),
     #patient
     path('add_patient/',views.add_patients, name='add_patient'),
     path('manage_patient/',views.manage_patient, name='manage_patient'),
