@@ -282,13 +282,7 @@ def chart(request):
             return render(request, 'chart.html', {"results":results})
 
     return render(request, 'chart.html')
-    # data = Care.objects.all()
-    # context = {
-    #     'data' : data
-        
-    # }
-    # return render(request, 'chart.html', context)
-    
+
 def chart2(request):
     data = Patient.objects.all()
     context = {
@@ -314,4 +308,20 @@ def count_health(request):
         
      }
     return render(request, 'count_healthwelfare.html', context)
+
+def count_disease(request):
+    data0 = Patient.objects.filter(Disease_id__Disease_id__contains = 'D0000').count()
+    data1 = Patient.objects.filter(Disease_id__Disease_id__contains = 'D0001').count()
+    data2 = Patient.objects.filter(Disease_id__Disease_id__contains = 'D0002').count()
+    data3 = Patient.objects.filter(Disease_id__Disease_id__contains = 'D0003').count()
+    data4 = Patient.objects.filter(Disease_id__Disease_id__contains = 'D0004').count()
+    context = {
+         'data0' : data0,
+         'data1' : data1,
+         'data2' : data2,
+         'data3' : data3,
+         'data4' : data4
+        
+     }
+    return render(request, 'count_diseasegroup.html', context)
     

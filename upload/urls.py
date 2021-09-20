@@ -33,6 +33,7 @@ urlpatterns = [
     path('dashboard/', views.chart, name = 'linechart'),
     path('dashboard2/', views.chart2, name = 'bubblechart'),
     path('counthealth/', views.count_health, name = 'counthealth'),
+    path('countdisease/', views.count_disease, name = 'countdisease'),
     #patient
     path('add_patient/',views.add_patients, name='add_patient'),
     path('manage_patient/',views.manage_patient, name='manage_patient'),
