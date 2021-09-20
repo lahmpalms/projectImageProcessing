@@ -288,3 +288,30 @@ def chart(request):
         
     # }
     # return render(request, 'chart.html', context)
+    
+def chart2(request):
+    data = Patient.objects.all()
+    context = {
+         'data' : data
+        
+     }
+    return render(request, 'bublechart.html', context)
+
+def count_health(request):
+    data0 = Patient.objects.filter(HealthWelfare__HealthWelfare_ID__contains = 'H00').count()
+    data1 = Patient.objects.filter(HealthWelfare__HealthWelfare_ID__contains = 'H01').count()
+    data2 = Patient.objects.filter(HealthWelfare__HealthWelfare_ID__contains = 'H02').count()
+    data3 = Patient.objects.filter(HealthWelfare__HealthWelfare_ID__contains = 'H03').count()
+    data4 = Patient.objects.filter(HealthWelfare__HealthWelfare_ID__contains = 'H04').count()
+    data5 = Patient.objects.filter(HealthWelfare__HealthWelfare_ID__contains = 'H05').count()
+    context = {
+         'data0' : data0,
+         'data1' : data1,
+         'data2' : data2,
+         'data3' : data3,
+         'data4' : data4,
+         'data5' : data5
+        
+     }
+    return render(request, 'count_healthwelfare.html', context)
+    
