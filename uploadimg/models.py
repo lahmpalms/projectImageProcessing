@@ -20,7 +20,7 @@ class frame(models.Model):
     frame_pixel = models.CharField(max_length=10)
     
     def __str__(self):
-        return self.frame_id +'    '+ self.frame_name
+        return self.frame_id +'    '+ self.frame_name + '   Frame size : ' + self.frame_size
  
 class HealthWelfare(models.Model):
     HealthWelfare_ID = models.CharField(max_length=3)
