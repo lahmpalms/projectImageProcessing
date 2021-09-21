@@ -97,7 +97,7 @@ chart
                     var myChart = new Chart(ctx, {
                         type: 'line',
                         data: {
-                            labels: [{% for result in results %} '{{result.patient_id}}', {% endfor %}],
+                            labels: [{% for result in results %} '{{result.care_date}},{{result.patient_id}}', {% endfor %}],
                             datasets: [{
                                 label: 'Pixels of wound size',
                                 data: [{% for result in results %} '{{result.size}}', {% endfor %}],
