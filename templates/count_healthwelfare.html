@@ -31,6 +31,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
     <!--
 
 TemplateMo 566 Medic Care
@@ -97,6 +99,7 @@ https://templatemo.com/tm-566-medic-care
             <p>Patient wound size monitoring System using image processing technique</p>
 
         </div>
+<<<<<<< HEAD
         <div class="container">
             <table>
                 <tr>
@@ -128,7 +131,88 @@ https://templatemo.com/tm-566-medic-care
                     <td> {{data5}} </td>
                 </tr>
             </table>
+=======
+        <div class="row mt-3 pt-3">
+            <div class="col-md-4">
+                <table>
+                    <tr>
+                        <th> Healthwelfare </th>
+                        <th> Number of user </th>
+                    </tr>
+                    <tr>
+                        <td> ไม่มีสิทธิ์การรักษา</td>
+                        <td> {{data0}} </td>
+                    </tr>
+                    <tr>
+                        <td> สิทธิ์ข้าราชการ </td>
+                        <td> {{data1}} </td>
+                    </tr>
+                    <tr>
+                        <td> สิทธิประกันสังคม</td>
+                        <td> {{data2}} </td>
+                    </tr>
+                    <tr>
+                        <td> สวัสดิการพนักงานส่วนท้องถิ่น</td>
+                        <td> {{data3}} </td>
+                    </tr>
+                    <tr>
+                        <td> สวัสดิการของหน่วยงานรัฐอื่นๆ</td>
+                        <td> {{data4}} </td>
+                    </tr>
+                    <tr>
+                        <td> หลักประกันสุขภาพแห่งชาติ</td>
+                        <td> {{data5}} </td>
+                    </tr>
+                </table>
+            </div>
+
+                <div class="col-md-8">
+                    <canvas id="myChart" width="40" height="20"></canvas>
+                <script>
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['ไม่มีสิทธิ์การรักษา', 'สิทธิ์ข้าราชการ', 'สิทธิประกันสังคม', 'สวัสดิการพนักงานส่วนท้องถิ่น', 'สวัสดิการของหน่วยงานรัฐอื่นๆ', 'หลักประกันสุขภาพแห่งชาติ'],
+                            datasets: [{
+                                label: 'Number of users',
+                                data: [{{data0}}, {{data1}},{{data2}}, {{data3}}, {{data4}}, {{data5}}],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                    
+                </script>
+
+                </div>
+            </div>
+>>>>>>> cead6847b860cb83a738b892bfb41619dbddd4f1
         </div>
+        
+
     </main>
 
     <footer class="site-footer section-padding" id="contact">
