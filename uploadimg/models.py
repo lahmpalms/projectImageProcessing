@@ -12,8 +12,16 @@ class Disease(models.Model):
     
     def __str__(self):
         return self.Disease_name
-    
 
+class frame(models.Model):
+    frame_id = models.CharField(max_length = 3)
+    frame_name = models.CharField(max_length=3)
+    frame_size = models.CharField(max_length=10)
+    frame_pixel = models.CharField(max_length=10)
+    
+    def __str__(self):
+        return self.frame_id +'    '+ self.frame_name
+ 
 class HealthWelfare(models.Model):
     HealthWelfare_ID = models.CharField(max_length=3)
     HealthWelfare_name = models.CharField(max_length=50)
@@ -67,6 +75,7 @@ class Care(models.Model):
     lesion_statusid = models.ForeignKey(LesionStatus, null=True, on_delete=CASCADE)
     image = models.ImageField()
     size = models.IntegerField(default=0)
+    frame = models.ForeignKey(frame, null=True, on_delete=CASCADE)
 
     def __str__(self):
         return  self.lesion_id+"  "+str(self.patient_id)

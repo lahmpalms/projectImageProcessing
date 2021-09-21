@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import fields
-from uploadimg.models import Image, Patient, Care, Nurse, Disease, HealthWelfare
+from uploadimg.models import Image, Patient, Care, Nurse, Disease, HealthWelfare, frame
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import User
 
@@ -23,7 +23,7 @@ class add_patient_form(forms.ModelForm):
 class add_care_form(forms.ModelForm):
     class Meta:
         model = Care
-        fields = ('patient_id', 'care_date', 'lesion_id', 'nurse_id', 'detail' , 'lesion_statusid', 'image')
+        fields = ('patient_id', 'care_date', 'lesion_id', 'nurse_id', 'detail' , 'lesion_statusid', 'image', 'frame')
 
 class add_nurse_form(forms.ModelForm):
     class Meta:
@@ -38,4 +38,9 @@ class add_disease_form(forms.ModelForm):
 class add_healthwelfare_form(forms.ModelForm):
     class Meta:
         model = HealthWelfare
+        fields = ('__all__')
+        
+class add_frame_form(forms.ModelForm):
+    class Meta:
+        model = frame
         fields = ('__all__')
