@@ -53,10 +53,12 @@ https://templatemo.com/tm-566-medic-care
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{% url 'search_data' %}">Search</a>
-                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'AdminPage' %}">
+                                <span> Admin Page</span>
+                            </a>
 
+                        </li>
                         <a class="navbar-brand d-none d-lg-block" href="">
                                 Medic Care
                                 <strong class="d-block">Patient wound size monitoring System</strong>
@@ -75,24 +77,19 @@ https://templatemo.com/tm-566-medic-care
                 <div class="row">
                     <div class="col">
                         <form method="post" enctype="multipart/form-data">
-                            {% csrf_token %} {{ add_care.as_p }}
+                            {% csrf_token %} {{ add_frame.as_p }}
                             <button type="submit" class="btn btn-outline-success">ADD</button>
                         </form>
                     </div>
                     <div class="col">
                         {% if add_obj %}
                         <h3>Succesfully uploaded !! </h3>
-                        <p class="text-primary">PatientID is : {{add_obj.patient_id}}</p>
-                        <p class="text-primary">Care date is : {{add_obj.care_date}}</p>
-                        <p class="text-primary">Lesion ID is : {{add_obj.lesion_id}}</p>
-                        <p class="text-primary">Nurse ID is : {{add_obj.nurse_id}}</p>
-                        <p class="text-primary">Detail is : {{add_obj.detail}}</p>
-                        <p class="text-primary">Lesion Status is : {{add_obj.lesion_statusid.lesion_statusname}}</p>
-                        <h5> Value of ROI : {{add_obj.size}} </h5>
-                        <p class="text-primary">Frame is : {{add_obj.frame}}</p>
-                        <p class="text-warning">URL is : {{add_obj.image.url}}</p>
-                        <p class="text-warning">PATH is : {{add_obj.image.path}}</p>
-                        <img src="{{ add_obj.image.url}}" alt="connect" class="mx-auto d-block" style="width : 30%"> {% endif %}
+                        <p class="text-primary">Frame ID is : {{add_obj.frame_id}}</p>
+                        <p class="text-info">Frame name : {{add_obj.frame_name}}</p>
+                        <p class="text-info">Frame size : {{add_obj.frame_size}}</p>
+                        <p class="text-info">Frame pixel : {{add_obj.frame_pixel}}</p>
+
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -183,11 +180,7 @@ https://templatemo.com/tm-566-medic-care
 </body>
 
 </html>
-
-
-
-<!-- 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -197,6 +190,7 @@ https://templatemo.com/tm-566-medic-care
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>Calculate Patient wound size</title>
+
 
     <style>
         h3 {
@@ -211,53 +205,32 @@ https://templatemo.com/tm-566-medic-care
 
 <body>
     <div class="container p-3 my-3 bg-primary text-white">
-        <h1>CARE DETAILS</h1>
+        <h1>ADD DISEASE</h1>
         <p>Patient wound size monitoring System using image processing technique</p>
         <a href="{% url 'index' %}"><button type="button" class="btn btn-success">CALCULATE PIXEL</button></a>
-        <a href="{% url 'add_patient' %}"><button type="button" class="btn btn-secondary">ADD PATIENTS</button></a>
-        <a href="{% url 'add_nurse' %}"><button type="button" class="btn btn-secondary">ADD NURSE</button></a>
-        <a href="{% url 'add_care' %}"><button type="button" class="btn btn-secondary">ADD CARE</button></a>
-        <a href="{% url 'add_disease' %}"><button type="button" class="btn btn-secondary">ADD DISEASE</button></a>
-        <a href="{% url 'search_data' %}"><button type="button" class="btn btn-secondary">Search</button></a>
-        <a href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-secondary">Manage nurse</button></a>
-        <a href="{% url 'manage_patient' %}"><button type="button" class="btn btn-secondary">Manage patient</button></a>
-        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-      Admin Menu
-    </button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="{% url 'manage_nurse' %}"><button type="button" class="btn btn-secondary">Manage nurse</button></a>
-            <a class="dropdown-item" href="{% url 'manage_patient' %}"><button type="button" class="btn btn-secondary">Manage patient</button></a>
-            <a class="dropdown-item" href="{% url 'manage_disease' %}"><button type="button" class="btn btn-secondary">Manage disease</button></a>
-            <a class="dropdown-item" href="{% url 'manage_healthwelfare' %}"><button type="button" class="btn btn-secondary">Manage healthwelfare</button></a>
-        </div>
-        <span> Hello, {{request.user}}</span>
-        <a href="{% url 'logout' %}"><button type="button" class="btn btn-danger">Logout</button></a>
+        <a href="{% url 'manage_disease' %}"><button type="button" class="btn btn-secondary">Manage disease</button></a>
     </div>
     <div class="container">
         <div class="row">
             <div class="col">
                 <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %} {{ add_care.as_p }}
+                    {% csrf_token %} {{ add_disease.as_p }}
                     <button type="submit" class="btn btn-outline-success">ADD</button>
                 </form>
             </div>
             <div class="col">
                 {% if add_obj %}
                 <h3>Succesfully uploaded !! </h3>
-                <p class="text-primary">PatientID is : {{add_obj.patient_id}}</p>
-                <p class="text-primary">Care date is : {{add_obj.care_date}}</p>
-                <p class="text-primary">Lesion ID is : {{add_obj.lesion_id}}</p>
-                <p class="text-primary">Nurse ID is : {{add_obj.nurse_id}}</p>
-                <p class="text-primary">Detail is : {{add_obj.detail}}</p>
-                <p class="text-primary">Lesion Status is : {{add_obj.lesion_statusid.lesion_statusname}}</p>
-                <h5> Value of ROI : {{add_obj.size}} </h5>
-                <p class="text-warning">URL is : {{add_obj.image.url}}</p>
-                <p class="text-warning">PATH is : {{add_obj.image.path}}</p>
-                <img src="{{ add_obj.image.url}}" alt="connect" class="mx-auto d-block" style="width : 30%"> {% endif %}
+                <p class="text-primary">Disease ID is : {{add_obj.Disease_id}}</p>
+                <p class="text-info">Disease name : {{add_obj.Disease_name}}</p>
+
+                {% endif %}
             </div>
         </div>
     </div>
     </form>
+
+
 </body>
 
 </html> -->

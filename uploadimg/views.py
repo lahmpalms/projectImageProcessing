@@ -9,8 +9,8 @@ from django.contrib.auth.decorators import login_required
 from upload.decorators import unauthenticated_user, allowed_users
 
 from numpy.lib.type_check import imag
-from uploadimg.forms import ImageForm ,add_patient_form, add_care_form, add_nurse_form, add_disease_form, add_disease_form, add_healthwelfare_form, CreateUserForm
-from .models import Care, Nurse, Patient, Disease, HealthWelfare
+from uploadimg.forms import ImageForm ,add_patient_form, add_care_form, add_nurse_form, add_disease_form, add_disease_form, add_healthwelfare_form, CreateUserForm, add_frame_form
+from .models import Care, Nurse, Patient, Disease, HealthWelfare, frame
 
 from uploadimg.utils import Calculate , bitwise, calculate_age
 from skimage.morphology import black_tophat, skeletonize, convex_hull_image
@@ -324,4 +324,38 @@ def count_disease(request):
         
      }
     return render(request, 'count_diseasegroup.html', context)
+
+def add_frame(request):
+    if request.method == 'POST':
+        add_frame = add_frame_form(request.POST)
+        if add_frame.is_valid():
+            add_frame.save()
+            add_obj = add_frame.instance
+            return render(request, 'add_frame.html', {'add_frame':add_frame, 'add_obj':add_obj})
+    else:
+        add_frame = add_frame_form
+    return render(request, 'add_frame.html',{'add_frame':add_frame})
+
+def manage_frame(request):
+    results = frame.objects.all()
+    return render(request, 'manage_frame.html', {'results':results})
+
+def updateFrame(request, frame_id):
+    frameedit = frame.objects.get(frame_id = frame_id)
+    form = add_frame_form(instance=frameedit)
+    if request.method == 'POST':
+        form = add_frame_form(request.POST, instance=frameedit)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_frame')
+    return render(request, 'edit_frame.html', {'form':form})
+
+def deleteFrame(request, frame_id):
+    frameedit = frame.objects.get(frame_id = frame_id)
+    context = {'delete_obj':frameedit}
+    if request.method == 'POST':
+        frameedit.delete()
+        return redirect('manage_frame')
+    return render(request, 'delete_frame.html', context)
+
     
