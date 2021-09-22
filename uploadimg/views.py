@@ -218,6 +218,35 @@ def deleteHealthwelfare(request, HealthWelfare_ID):
         return redirect('manage_healthwelfare')
     return render(request, 'delete_healthwelfare.html', context)
 
+def manage_care(request):
+    results = Care.objects.all()
+    if request.method == "POST":
+        query_name = request.POST.get('name', None)
+        if query_name:
+            search_results = Care.objects.filter(patient_id__first_name__contains=query_name)
+            return render(request, 'manage_care.html', {'results':search_results})
+    return render(request, 'manage_care.html', {'results':results})
+
+def updateCare(request, lesion_id):
+    care = Care.objects.get(lesion_id = lesion_id)
+    form = add_care_form(instance=care)
+    if request.method == 'POST':
+        form = add_care_form(request.POST, instance=care)
+        if form.is_valid():
+            form.save()
+            return redirect('manage_care')
+    return render(request, 'edit_care.html', {'form':form})
+
+
+def deleteCare(request, lesion_id):
+    care = Care.objects.get(lesion_id = lesion_id)
+    context = {'delete_obj':care}
+    if request.method == 'POST':
+        care.delete()
+        return redirect('manage_care')
+    return render(request, 'delete_care.html', context)
+
+
 @unauthenticated_user
 def registerPage(request):
     form = CreateUserForm()
@@ -274,6 +303,8 @@ def AdminPage(request):
 
     return render(request, 'admin_page.html')
 
+@login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def chart(request):
     if request.method == "POST":
         query_name = request.POST.get('name', None)
@@ -283,6 +314,8 @@ def chart(request):
 
     return render(request, 'chart.html')
 
+@login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def chart2(request):
     data = Patient.objects.all()
     context = {
@@ -291,6 +324,8 @@ def chart2(request):
      }
     return render(request, 'bublechart.html', context)
 
+@login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def count_health(request):
     data0 = Patient.objects.filter(HealthWelfare__HealthWelfare_ID__contains = 'H00').count()
     data1 = Patient.objects.filter(HealthWelfare__HealthWelfare_ID__contains = 'H01').count()
@@ -309,6 +344,8 @@ def count_health(request):
      }
     return render(request, 'count_healthwelfare.html', context)
 
+@login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def count_disease(request):
     data0 = Patient.objects.filter(Disease_id__Disease_id__contains = 'D0000').count()
     data1 = Patient.objects.filter(Disease_id__Disease_id__contains = 'D0001').count()
@@ -325,6 +362,8 @@ def count_disease(request):
      }
     return render(request, 'count_diseasegroup.html', context)
 
+@login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def add_frame(request):
     if request.method == 'POST':
         add_frame = add_frame_form(request.POST)
@@ -336,10 +375,14 @@ def add_frame(request):
         add_frame = add_frame_form
     return render(request, 'add_frame.html',{'add_frame':add_frame})
 
+@login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def manage_frame(request):
     results = frame.objects.all()
     return render(request, 'manage_frame.html', {'results':results})
 
+@login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def updateFrame(request, frame_id):
     frameedit = frame.objects.get(frame_id = frame_id)
     form = add_frame_form(instance=frameedit)
@@ -350,6 +393,8 @@ def updateFrame(request, frame_id):
             return redirect('manage_frame')
     return render(request, 'edit_frame.html', {'form':form})
 
+@login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def deleteFrame(request, frame_id):
     frameedit = frame.objects.get(frame_id = frame_id)
     context = {'delete_obj':frameedit}

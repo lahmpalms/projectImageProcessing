@@ -35,6 +35,11 @@ urlpatterns = [
     path('counthealth/', views.count_health, name = 'counthealth'),
     path('countdisease/', views.count_disease, name = 'countdisease'),
     
+    #care
+    path('manage_care/',views.manage_care, name='manage_care'),
+    path('update_care/<str:lesion_id>',views.updateCare, name='update_care'),
+    path('delete_care/<str:lesion_id>',views.deleteCare, name='delete_care'),
+    
     #frame
     path('add_frame/', views.add_frame, name = 'add_frame'),
     path('manage_frame/',views.manage_frame, name='manage_frame'),
