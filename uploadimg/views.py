@@ -218,6 +218,8 @@ def deleteHealthwelfare(request, HealthWelfare_ID):
         return redirect('manage_healthwelfare')
     return render(request, 'delete_healthwelfare.html', context)
 
+@login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def manage_care(request):
     results = Care.objects.all()
     if request.method == "POST":
@@ -227,6 +229,8 @@ def manage_care(request):
             return render(request, 'manage_care.html', {'results':search_results})
     return render(request, 'manage_care.html', {'results':results})
 
+@login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def updateCare(request, lesion_id):
     care = Care.objects.get(lesion_id = lesion_id)
     form = add_care_form(instance=care)
@@ -237,7 +241,8 @@ def updateCare(request, lesion_id):
             return redirect('manage_care')
     return render(request, 'edit_care.html', {'form':form})
 
-
+@login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
 def deleteCare(request, lesion_id):
     care = Care.objects.get(lesion_id = lesion_id)
     context = {'delete_obj':care}
@@ -403,4 +408,14 @@ def deleteFrame(request, frame_id):
         return redirect('manage_frame')
     return render(request, 'delete_frame.html', context)
 
-    
+@login_required(login_url = 'login')
+@allowed_users(allowed_roles=['admin'])
+def search_date(request):
+    if request.method == "POST":
+        fromdate = request.POST.get('fromdate')
+        todate = request.POST.get('todate')
+        if fromdate:
+            results = Care.objects.filter(care_date__range = (fromdate, todate))
+            return render(request, 'search_date.html', {"results":results})
+
+    return render(request, 'search_date.html')

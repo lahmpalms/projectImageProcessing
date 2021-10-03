@@ -58,6 +58,8 @@ urlpatterns = [
     path('update_nurse/<str:nurse_id>',views.updateNurse, name='update_nurse'),
     path('delete_nurse/<str:nurse_id>',views.deleteNurse, name='delete_nurse'),
     
+    #search
+    path('search_date/',views.search_date, name='search_date'),
     path('search/',views.search, name='search_data'),
     path('care/',views.add_care, name='add_care'),
     
