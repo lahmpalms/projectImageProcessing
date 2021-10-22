@@ -322,9 +322,23 @@ def chart(request):
 @login_required(login_url = 'login')
 @allowed_users(allowed_roles=['admin'])
 def chart2(request):
-    data = Patient.objects.all()
+    data = Patient.objects.values('age').distinct()
+    data0 = Patient.objects.all().filter(age = 22).count()
+    data1 = Patient.objects.all().filter(age = 23).count()
+    data2 = Patient.objects.all().filter(age = 35).count()
+    data3 = Patient.objects.all().filter(age = 43).count()
+    data4 = Patient.objects.all().filter(age = 54).count()
+    data5 = Patient.objects.all().filter(age = 65).count()
+    data6 = Patient.objects.all().filter(age = 66).count()
     context = {
-         'data' : data
+        'data0': data0,
+        'data1': data1,
+        'data2': data2,
+        'data3': data3,
+        'data4': data4,
+        'data5': data5,
+        'data6': data6,
+        'data' : data
         
      }
     return render(request, 'bublechart.html', context)
